@@ -1,0 +1,21 @@
+.Events {
+  text-align: center;
+  width: 100%;
+}
+
+
+.level-container{
+  display: flex;
+  width: 100%;
+}
+.round-levels{
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  margin: 10px;
+}
+
+.round-level-input{
+  flex: 1;
+  width: 100%;
+}

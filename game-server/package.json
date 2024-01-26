@@ -1,0 +1,39 @@
+{
+  "name": "game-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install",
+    "dev": "pm2 start ecosystem.config.js --watch --no-daemon",
+    "start": "pm2 start ecosystem.config.js",
+    "start:lassie-bridge": "ts-node -T src/lassie-bridge/index.ts",
+    "start:mqtt": "ts-node -T src/mqtt/index.ts",
+    "start:state-server": "ts-node -T src/state-server/index.ts",
+    "start:scheduler": "ts-node -T src/scheduler/index.ts",
+    "prod": "pm2 start ecosystem.config.js --env production"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/dotenv-parse-variables": "^2.0.1",
+    "@types/lodash": "^4.14.189",
+    "@types/node-persist": "^3.1.3",
+    "pm2": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "aedes": "^0.48.0",
+    "axios": "^1.1.3",
+    "dayjs": "^1.11.6",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.3",
+    "dotenv-parse-variables": "^2.0.0",
+    "lodash": "^4.17.21",
+    "mqtt": "^4.3.7",
+    "node-persist": "^3.1.0",
+    "websocket-stream": "^5.5.2"
+  }
+}
