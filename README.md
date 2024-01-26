@@ -7,6 +7,7 @@ Each folder in the root is a dedicated place for a specific part of the project.
 - **game-dashboard**: Admin control dashboard for the game
 - **game-visuals**: Visuals for the game made in Processing (full-slave)
 - **specifications**: Contains commonly used definitions and typed variables
+- **promo-site**: Promotion website for the event
 
 ## Questions
 If you have any concerns or questions on the project's structure and where to work, or to discuss issues, feel free to contact Joris Lodewijks.
