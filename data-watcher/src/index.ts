@@ -5,32 +5,36 @@ import fs from "fs";
 import path from "path";
 
 var argv = require("minimist")(process.argv.slice(2));
-console.dir(argv);
 
+// Path to watch
 const DEFAULT_PATH = path.join(process.cwd(), "tokendrink-pubcard-data");
 const pathToWatch = argv.path || DEFAULT_PATH;
 
+// Check if path is specified
 if (!argv.path) {
   console.log("No path specified, using default: ", DEFAULT_PATH);
 }
 
-if (argv.clean) {
+// Clean data folder
+if (fs.existsSync(pathToWatch)) {
   console.log("Cleaning data folder...");
-
-  if (fs.existsSync(pathToWatch)) fs.rmSync(pathToWatch, { recursive: true });
-  fs.mkdirSync(pathToWatch);
+  if (argv.clean) fs.rmSync(pathToWatch, { recursive: true });
 }
+fs.mkdirSync(pathToWatch, { recursive: true });
 
+// Start watcher
 console.log("Starting watcher...");
 const watcher = chokidar.watch(pathToWatch, {
   persistent: true,
 });
 
+// On Watcher ready
 watcher.on("ready", () => {
   console.log("Ready to watch for changes!");
   console.log("Monitoring path: ", pathToWatch);
 });
 
+// On file added
 watcher.on("add", async (path) => {
   const time = new Date().toLocaleTimeString();
   console.log(`${time}: File ${path} has been added.`);
