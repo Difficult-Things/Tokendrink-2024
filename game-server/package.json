@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "setup": "npm install",
+    "setup": "npm install && npm install --prefix ../game-dashboard && npm install --prefix ../data-watcher",
     "dev": "pm2 start ecosystem.config.js --watch --no-daemon",
     "start": "pm2 start ecosystem.config.js",
     "start:mqtt": "ts-node -T src/mqtt/index.ts",
-    "start:dashboard": "ts-node -T src/mqtt/index.ts",
-    "start:dataWatcher": "ts-node -T src/mqtt/index.ts",
+    "start:dashboard": "npm run dev ../game-dashboard",
+    "start:dataWatcher": "npm run start ../data-watcher/",
 
     "prod": "pm2 start ecosystem.config.js --env production"
   },
