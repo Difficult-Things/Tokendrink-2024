@@ -12,7 +12,7 @@ void clientConnected() {
   println("client connected");
   client.publish(statusTopic, "ONLINE");
 
-  client.subscribe(gameStateTopic);
+  client.subscribe(gameStateTopic, 2);
 }
 
 void messageReceived(String topic, byte[] payload) {
@@ -20,6 +20,7 @@ void messageReceived(String topic, byte[] payload) {
   if(topic.equals(gameStateTopic)){
       gameState= parseJSONObject(incomingPayload);
   }
+
 }
 
 void connectionLost() {
