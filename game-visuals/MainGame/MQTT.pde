@@ -8,10 +8,6 @@ void setupMQTT() {
 }
 
 
-void keyPressed() {
-  client.publish("/hello", "world");
-}
-
 void clientConnected() {
   println("client connected");
   client.publish(statusTopic, "ONLINE");
@@ -20,7 +16,10 @@ void clientConnected() {
 }
 
 void messageReceived(String topic, byte[] payload) {
-  println("new message: " + topic + " - " + new String(payload));
+  String incomingPayload = new String(payload);
+  if(topic.equals(gameStateTopic)){
+      gameState= parseJSONObject(incomingPayload);
+  }
 }
 
 void connectionLost() {
