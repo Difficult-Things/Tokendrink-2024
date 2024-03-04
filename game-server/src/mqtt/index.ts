@@ -10,9 +10,9 @@ const websocketPort = 8888
 const authorizedClients = new Set();
 
 aedes.authenticate = (client, username, password, callback) => {
-  if (username === MQTT_USERNAME && password.toString('utf-8') === MQTT_PASSWORD) {
+  // if (username === MQTT_USERNAME && password.toString('utf-8') === MQTT_PASSWORD) {
     authorizedClients.add(client.id);
-  }
+  // }
 
   callback(null, true);
 }

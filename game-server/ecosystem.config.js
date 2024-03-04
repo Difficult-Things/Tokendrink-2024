@@ -38,15 +38,15 @@ module.exports = {
             error_file : "./logs/dataWatcer-err.log",
             out_file : "./logs/dataWatcher-out.log",
         },
-        {
-            name: 'dashboard',
-            script: npmPath,
-            cwd: __dirname,
-            args: 'run start:dashboard',
-            time: true,
-            error_file : "./logs/dashboard-err.log",
-            out_file : "./logs/dashoard-out.log",
-        },
+        // {
+        //     name: 'dashboard',
+        //     script: npmPath,
+        //     cwd: __dirname,
+        //     args: 'run start:dashboard',
+        //     time: true,
+        //     error_file : "./logs/dashboard-err.log",
+        //     out_file : "./logs/dashoard-out.log",
+        // },
 
 
     ]
