@@ -1,4 +1,4 @@
-String statusTopic = "gamevisuals/status";
+String statusTopic = "pullenwand/status";
 String serverIP = "mqtt://localhost";
-String uuid = "mainVisuals";
+String uuid = "pullenwandVisuals";
 String gameStateTopic = "gamevisuals/gamestate";

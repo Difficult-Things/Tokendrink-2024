@@ -6,7 +6,9 @@ void setup() {
 
   gameState = parseJSONObject("{\"round\":5,\"state\":\"play\", \"ranking\": {\"red\":1, \"orange\":2, \"green\":3, \"blue\":4, \"purple\":5}}");
   setupHorses();
-  //setupMQTT();
+  
+  //Comment line below if testing without MQTT
+  setupMQTT();
   delay(100);
 }
 
