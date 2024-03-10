@@ -53,9 +53,21 @@ void draw() {
   case 5:
     switch(state) {
     case "drinking":
+      horseStart = 0;
+      xWinnerHorse = 0;
+      xSecondHorse = 0;
+      xThirdHorse = 0;
+      xFourthHorse = 0;
+      xLastHorse = 0;
+      xMountains = 0;
+      xFence = 0;
+      xClouds = 0;
+      xStart = 0;
+      xFinish = 1700;
       idlePhaseHorses();
       break;
     case "reveal":
+      idlePhaseHorses();
       break;
     case "play":
       drawHorses(ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
