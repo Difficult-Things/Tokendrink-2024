@@ -10,6 +10,7 @@ void setup() {
   gameState = parseJSONObject("{\"round\":4,\"state\":\"play\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
   setupHorses();
   setupGrijper();
+  setupSlots();
   //Comment line below if testing without MQTT
   setupMQTT();
   delay(100);
@@ -26,20 +27,24 @@ void draw() {
   case 1:
     break;
   case 2:
+    switch(state) {
+    case "drinking":
+      resetSlotValues();
+      drawSlots(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      break;
+    case "reveal":
+      drawSlots(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      break;
+    case "play":
+      drawSlots(true, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      break;
+    }
     break;
   case 3:
   case 4:
     switch(state) {
     case "drinking":
-      grabberMatrixX = -304/2;
-      grabberMatrixY = -1400;
-      grabberX = 0;
-      grabberY = 0;
-      grabberYMax = 1200;
-      currentTry = 0;
-      gravity = 10;
-      wentDown = false;
-      xReached = false;
+      resetGrijperValues();
       drawGrijper(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     case "reveal":
@@ -53,17 +58,7 @@ void draw() {
   case 5:
     switch(state) {
     case "drinking":
-      horseStart = 0;
-      xWinnerHorse = 0;
-      xSecondHorse = 0;
-      xThirdHorse = 0;
-      xFourthHorse = 0;
-      xLastHorse = 0;
-      xMountains = 0;
-      xFence = 0;
-      xClouds = 0;
-      xStart = 0;
-      xFinish = 1700;
+      resetHorseValues();
       idlePhaseHorses();
       break;
     case "reveal":

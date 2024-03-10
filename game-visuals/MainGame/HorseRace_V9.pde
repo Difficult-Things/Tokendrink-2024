@@ -17,6 +17,20 @@ void idlePhaseHorses() {
   startingBackground();
 }
 
+void resetHorseValues(){
+   horseStart = 0;
+      xWinnerHorse = 0;
+      xSecondHorse = 0;
+      xThirdHorse = 0;
+      xFourthHorse = 0;
+      xLastHorse = 0;
+      xMountains = 0;
+      xFence = 0;
+      xClouds = 0;
+      xStart = 0;
+      xFinish = 1700;
+}
+
 void drawHorses(int green, int purple, int orange, int blue, int red) {
   if ((horseStart == 0)) {
     horseStart =1;

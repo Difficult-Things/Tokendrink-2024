@@ -19,6 +19,18 @@ String[] images = {"Bal Groen.png", "Bal Paars.png", "Bal Oranje.png", "Bal Blau
 String winner = "... Wins!";
 
 
+void resetGrijperValues(){
+        grabberMatrixX = -304/2;
+      grabberMatrixY = -1400;
+      grabberX = 0;
+      grabberY = 0;
+      grabberYMax = 1200;
+      currentTry = 0;
+      gravity = 10;
+      wentDown = false;
+      xReached = false;
+}
+
 void setupGrijper() {
   backgroundImg = loadImage("Grijper_Background.png");
   forgroundImg = loadImage("GrijperForground.png");
