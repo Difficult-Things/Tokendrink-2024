@@ -1,13 +1,13 @@
-int numSlots = 36; // Number of slots on the roulette wheel
+static int numSlots = 36; // Number of slots on the roulette wheel
 float angleBetweenSlots; // Angle between each slot
-float wheelRadius = 200; // Radius of the roulette wheel
+static float wheelRadius = 200; // Radius of the roulette wheel
 float ballRadius = 10; // Radius of the ball
 
 float wheelAngle = 0; // Initial angle of the wheel
 float ballAngle = 0; // Initial angle of the ball
 float ballSpeed = radians(2); // Initial speed of the ball
 float ballRotation = 0; // Rotation of the ball
-boolean spinning = false; // Flag to indicate if the wheel is spinning
+boolean spinningRoulette = false; // Flag to indicate if the wheel is spinning
 
 int landedNumber = -1; // Number where the ball has landed
 
@@ -26,7 +26,6 @@ PImage background; // Declare a PImage variable
 
 int numImages = 50; // Number of images to fall
 float[] imageX, imageY; // Arrays to store image positions
-float gravity = 0.5; // Gravity value
 float speed = 25; // Initial speed of falling images
 
 //animation don't start, begin animation does start inmediattely
@@ -36,16 +35,16 @@ boolean animationStartedBlue = false;
 boolean animationStartedGreen = false;
 boolean animationStartedOrange = false;
 boolean beginanimation = true;
-
-int count = 0; //used for counting mouse clicks
+boolean rouletteStartedSpinning = false;
+int count = 0;
 
 int winningnumber; //used for final animation
 
-static int red = 1;
-static int green = 2;
-static int purple = 3;
-static int orange = 4;
-static int blue = 5;
+static int redNumber = 1;
+static int greenNumber = 2;
+static int purpleNumber = 3;
+static int orangeNumber = 4;
+static int blueNumber = 5;
 
 //numbers of the layout board
 int[][] numbers = {
@@ -84,8 +83,50 @@ int[][] numbers2 = {
 //positions of the chips placed
 int[][] positions = new int[][]{{20, 10, 30, 29, 16, 13, 14, 6, 7, 34}, {5, 24, 1, 2, 12, 9, 31, 17, 23}, {28, 32, 3, 8, 34, 0, 19}, {21, 22, 33, 11, 18, 15}, {35, 25, 26, 27, 4}};
 
-void setup() {
-  fullScreen();
+void resetRouletteValues() {
+  wheelAngle = 0; // Initial angle of the wheel
+  ballAngle = 0; // Initial angle of the ball
+  ballSpeed = radians(2); // Initial speed of the ball
+  ballRotation = 0; // Rotation of the ball
+  spinningRoulette = false; // Flag to indicate if the wheel is spinning
+
+  landedNumber = -1; // Number where the ball has landed
+
+  landedBallSize = 10; // Initial size of the landed ball
+  maxSize = 100; // Maximum size of the landed ball
+  animationStarted = false; // Flag to indicate if the animation has started
+
+  numImages = 50; // Number of images to fall
+  speed = 25; // Initial speed of falling images
+
+  //animation don't start, begin animation does start inmediattely
+  animationStartedRed = false;
+  animationStartedPurple = false;
+  animationStartedBlue = false;
+  animationStartedGreen = false;
+  animationStartedOrange = false;
+  beginanimation = true;
+  rouletteStartedSpinning = false;
+  count = 0;
+  
+numbers = new int[][]{
+  {3, color(255, 0, 0), 0}, {6, color(0, 0, 0), 0}, // Red
+  {9, color(255, 0, 0), 0}, {12, color(255, 0, 0), 0}, {15, color(0, 0, 0), 0}, // Black
+  {18, color(255, 0, 0), 0}, {21, color(255, 0, 0), 0}, {24, color(0, 0, 0), 0}, // Red
+  {27, color(255, 0, 0), 0}, {30, color(255, 0, 0), 0}, {33, color(0, 0, 0), 0}, // Black
+  {36, color(255, 0, 0), 0}, {2, color(0, 0, 0), 0}, {5, color(255, 0, 0), 0}, // Red
+  {8, color(0, 0, 0), 0}, {11, color(0, 0, 0), 0}, {14, color(255, 0, 0), 0}, // Black
+  {17, color(0, 0, 0), 0}, {20, color(0, 0, 0), 0}, {23, color(255, 0, 0), 0}, // Red
+  {26, color(0, 0, 0), 0}, {29, color(0, 0, 0), 0}, {32, color(255, 0, 0), 0}, // Black
+  {35, color(0, 0, 0), 0}, {1, color(255, 0, 0), 0}, {4, color(0, 0, 0), 0}, // Red
+  {7, color(255, 0, 0), 0}, {10, color(0, 0, 0), 0}, {13, color(0, 0, 0), 0}, // Black
+  {16, color(255, 0, 0), 0}, {19, color(255, 0, 0), 0}, {22, color(0, 0, 0), 0}, // Red
+  {25, color(255, 0, 0), 0}, {28, color(0, 0, 0), 0}, {31, color(0, 0, 0), 0}, // Red
+  {34, color(255, 0, 0), 0}
+};
+}
+
+void setupRoulette() {
 
   angleBetweenSlots = TWO_PI / numSlots;
 
@@ -107,24 +148,36 @@ void setup() {
   }
 }
 
-void draw() {
+void drawRoulette(boolean start, boolean reveal, int green, int purple, int orange, int blue, int red) {
   background(16, 120, 35);
-  if (beginanimation) {
+  if (!start && !reveal) {
     drawFallingImagesSlow();
   }
   drawWheel();
   drawBettingLayout();
   drawZeroRectangle();
-  drawSpinButton();
 
-  if (spinning) {
+  if (start && !reveal && !rouletteStartedSpinning) {
+    rouletteStartedSpinning = true;
+    spinningRoulette = true;
+    spinStartTime = millis();
+    //ballSpeed = radians(random(8, 12));
+    ballSpeed = radians(12);
+
+    animationStarted = false;
+    landedBallSize = 10;
+  }
+
+  if (spinningRoulette) {
     spinWheel();
     spinBall();
   } else {
     // If the wheel has stopped spinning, display the landed number
     landedNumber = calculateLandedNumber();
     if (millis() - spinStartTime > 3000) { // Adjust the delay time as needed (2000 milliseconds in this example)
+    count = 7; //IDK why this number anymore, was some logic behind it please kill me now (this was gino btw)
       displayLandedBallAnimation(winningnumber);
+      
     }
   }
 
@@ -132,18 +185,21 @@ void draw() {
 
   // Draw chips on the betting layout
   for (int i = 0; i < numbers.length; i++) {
-    if (numbers[i][2] == blue) {
-      drawChipOnNumber(i, blue);
-    } else if (numbers[i][2] == red) {
-      drawChipOnNumber(i, red);
-      image(chipImageRed, 269, -10, 40, 40); // Adjust the size of the image as needed
-    } else if (numbers[i][2] == green) {
-      drawChipOnNumber(i, green);
-    } else if (numbers[i][2] == orange) {
-      drawChipOnNumber(i, orange);
-    } else if (numbers[i][2] == purple) {
-      drawChipOnNumber(i, purple);
+    if (numbers[i][2] == blueNumber) {
+      drawChipOnNumber(i, blueNumber);
+    } else if (numbers[i][2] == redNumber) {
+      drawChipOnNumber(i, redNumber);
+      //image(chipImageRed, 269, -10, 40, 40); // Adjust the size of the image as needed
+    } else if (numbers[i][2] == greenNumber) {
+      drawChipOnNumber(i, greenNumber);
+    } else if (numbers[i][2] == orangeNumber) {
+      drawChipOnNumber(i, orangeNumber);
+    } else if (numbers[i][2] == purpleNumber) {
+      drawChipOnNumber(i, purpleNumber);
     }
+  }
+  if (!start && reveal) {
+    revealRoulette(green, purple, orange, blue, red);
   }
 
   if (animationStartedRed) {
@@ -169,7 +225,7 @@ void revealred(int redPos) {
 
   for (int i = 0; i < redIndexes.length; i++) {
 
-    numbers[redIndexes[i]][2] = red;
+    numbers[redIndexes[i]][2] = redNumber;
   }
   if (redPos == 1) {
     winningnumber = 1;
@@ -182,7 +238,7 @@ void revealpurple(int purplePos) {
 
   for (int i = 0; i < purpleIndexes.length; i++) {
 
-    numbers[purpleIndexes[i]][2] = purple;
+    numbers[purpleIndexes[i]][2] = purpleNumber;
   }
   if (purplePos == 1) {
     winningnumber = 2;
@@ -195,7 +251,7 @@ void revealblue(int bluePos) {
 
   for (int i = 0; i < blueIndexes.length; i++) {
 
-    numbers[blueIndexes[i]][2] = blue;
+    numbers[blueIndexes[i]][2] = blueNumber;
   }
   if (bluePos == 1) {
     winningnumber = 3;
@@ -208,7 +264,7 @@ void revealgreen(int greenPos) {
 
   for (int i = 0; i < greenIndexes.length; i++) {
 
-    numbers[greenIndexes[i]][2] = green;
+    numbers[greenIndexes[i]][2] = greenNumber;
   }
   if (greenPos == 1) {
     winningnumber = 4;
@@ -221,7 +277,7 @@ void revealorange(int orangePos) {
 
   for (int i = 0; i < orangeIndexes.length; i++) {
 
-    numbers[orangeIndexes[i]][2] = orange;
+    numbers[orangeIndexes[i]][2] = orangeNumber;
   }
   if (orangePos == 1) {
     winningnumber = 5;
@@ -234,15 +290,15 @@ void drawChipOnNumber(int index, int yearColor) {
   float y = floor(index / 12) * (height / 15) - 100 + (height / 15) / 2;
 
   noStroke();
-  if (yearColor == red) {
+  if (yearColor == redNumber) {
     image(chipImageRed, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
-  } else if (yearColor == blue) {
+  } else if (yearColor == blueNumber) {
     image(chipImageBlue, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
-  } else if (yearColor == orange) {
+  } else if (yearColor == orangeNumber) {
     image(chipImageOrange, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
-  } else if (yearColor == green) {
+  } else if (yearColor == greenNumber) {
     image(chipImageGreen, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
-  } else if (yearColor == purple) {
+  } else if (yearColor == purpleNumber) {
     image(chipImagePurple, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
   }
 }
@@ -299,7 +355,7 @@ void spinWheel() {
 
   if (wheelAngle >= TWO_PI) {
     wheelAngle = 0;
-    spinning = false;
+    spinningRoulette = false;
   }
 }
 
@@ -567,14 +623,7 @@ int getLandedColor(int number) {
 }
 
 //button for spinning
-void drawSpinButton() {
-  fill(100);
-  rect(width - 1200, height - 1350, 80, 40);
-  fill(255);
-  textSize(20);
-  textAlign(CENTER, CENTER);
-  text("SPIN", width - 1158, height - 1332);
-}
+
 
 // animation for the beginning, tokens falling down slowly
 void drawFallingImagesSlow() {
@@ -635,68 +684,54 @@ void drawFallingImagesOrange() {
   }
 }
 
-//what happens when the moused is pressed
-void mousePressed() {
-  // Check if the mouse is within the button bounds and the wheel is not spinning, if the mouse is on the spin button and you click, it will spin
-  if (!spinning && mouseX >= width - 720 && mouseX <= width - 660 && mouseY >= height - 800 && mouseY <= height - 700) {
-    spinning = true;
-    spinStartTime = millis();
-    //ballSpeed = radians(random(8, 12));
-    ballSpeed = radians(12);
 
-    animationStarted = false;
-    landedBallSize = 10;
+
+int startRevealTime = 0;
+static int revealDelay = 5000;
+
+void revealRoulette(int green, int purple, int orange, int blue, int red) {
+  if (startRevealTime == 0) {
+    startRevealTime = millis();
+    if (!spinningRoulette && count == 1) {
+      beginanimation = false;
+    }
   }
-
-  //everytime you click, the count will go up by one. Be careful with clicking! because there is a sudden order
-  if (!spinning) {
-    count++;
-  }
-  // Reset animation flags when starting a new animation
-  animationStartedRed = false;
-  animationStartedPurple = false;
-  animationStartedBlue = false;
-  animationStartedGreen = false;
-  animationStartedOrange = false;
-
-  //first time you click, the begin animation will stop
-  if (!spinning && count == 1) {
-    beginanimation = false;
-  }
-
-  //second time you click, the red fiches will show
-  if (!spinning && count == 2) {
+  if (!animationStartedRed && millis() - startRevealTime < revealDelay * 1) {
     animationStartedRed = true;
     resetFallingImagePositions();
-    revealred(1); //enter here the position of red
+    revealred(red); //enter here the position of red
   }
+
 
   //third time you click, the purple fiches will show
-  if (!spinning && count == 3) {
+  if (millis() - startRevealTime >= revealDelay * 1 && millis() - startRevealTime < revealDelay * 2 && !animationStartedPurple) {
+    animationStartedRed = false;
     animationStartedPurple = true;
     resetFallingImagePositions();
-    revealpurple(4); //enter here the position of purple
+    revealpurple(purple); //enter here the position of purple
   }
 
-  //fourth time you click, the blue fiches will show
-  if (!spinning && count == 4) {
+
+  if (millis() - startRevealTime >= revealDelay * 2 && millis() - startRevealTime < revealDelay * 3&& !animationStartedBlue) {
+    animationStartedPurple = false;
+    //fourth time you click, the blue fiches will show
     animationStartedBlue = true;
     resetFallingImagePositions();
-    revealblue(2); //enter here the position of blue
+    revealblue(blue); //enter here the position of blue
   }
-
-  //fifth time you click, the green fiches will show
-  if (!spinning && count == 5) {
+  if (millis() - startRevealTime >= revealDelay * 3 && millis() - startRevealTime < revealDelay * 4&& !animationStartedGreen) {
+    animationStartedBlue = false;
+    //fifth time you click, the green fiches will show
     animationStartedGreen = true;
     resetFallingImagePositions();
-    revealgreen(3); //enter here the position of green
+    revealgreen(green); //enter here the position of green
   }
-
-  //sixth time you click, the orange fiches will show
-  if (!spinning && count == 6) {
+  if (millis() - startRevealTime >= revealDelay * 4 && !animationStartedOrange) {
+    animationStartedGreen = false;
+    //sixth time you click, the orange fiches will show
     animationStartedOrange = true;
     resetFallingImagePositions();
-    revealorange(5); //enter here the position of orange
+    revealorange(orange); //enter here the position of orange
   }
 }
 

@@ -7,10 +7,11 @@ JSONObject gameState;
 void setup() {
   //fullScreen();
   size(1920, 1080);
-  gameState = parseJSONObject("{\"round\":4,\"state\":\"play\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
+  gameState = parseJSONObject("{\"round\":1,\"state\":\"drinking\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
   setupHorses();
   setupGrijper();
   setupSlots();
+  setupRoulette();
   //Comment line below if testing without MQTT
   setupMQTT();
   delay(100);
@@ -25,6 +26,18 @@ void draw() {
 
   switch(round) {
   case 1:
+        switch(state) {
+    case "drinking":
+      resetRouletteValues();
+      drawRoulette(false, false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      break;
+    case "reveal":
+      drawRoulette(false, true, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      break;
+    case "play":
+      drawRoulette(true, false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      break;
+    }
     break;
   case 2:
     switch(state) {
