@@ -46,6 +46,8 @@ static int purpleNumber = 3;
 static int orangeNumber = 4;
 static int blueNumber = 5;
 
+  PFont Font1;
+
 //numbers of the layout board
 int[][] numbers = {
   {3, color(255, 0, 0), 0}, {6, color(0, 0, 0), 0}, // Red
@@ -129,7 +131,7 @@ numbers = new int[][]{
 }
 
 void setupRoulette() {
-
+  Font1  = createFont("Arial Bold", 18);
   angleBetweenSlots = TWO_PI / numSlots;
 
   chipImageBlue = loadImage("BlueToken.png");
@@ -220,6 +222,7 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   if (animationStartedOrange) {
     drawFallingImagesOrange();
   }
+  drawAllNumbers();
 }
 
 //reveal the red chips on the board, redPos decides the winning color
@@ -760,16 +763,36 @@ void drawBettingLayout() {
   }
 }
 
+void drawAllNumbers(){
+    float cellWidth = width / 25;
+  float cellHeight = height / 15;
+
+  for (int i = 0; i < numbers.length; i++) {
+    float x = (i % 12) * cellWidth + 315;
+    float y = floor(i / 12) * cellHeight - 100;
+
+    drawNumberOnCell(x, y, cellWidth, cellHeight, numbers[i][0]);
+  }
+}
+
 //draw the right cells
 void drawNumberCell(float x, float y, float w, float h, int number, color cellColor) {
   fill(cellColor);
   stroke(255);  // White stroke color
   rect(x, y, w, h);
 
+
+}
+
+void drawNumberOnCell(float x, float y, float w, float h, int number){
+  pushStyle();
   fill(255);
+  circle(x+w/2,y+h/2,28);
+   fill(0);
   textSize(20);
   textAlign(CENTER, CENTER);
-  text(Integer.toString(number), x + w / 2, y + h / 2);
+  text(Integer.toString(number), x + w / 2, y + h / 2-2);
+  popStyle();
 }
 
 //draw the zero button on the draw layout
