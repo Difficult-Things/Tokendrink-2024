@@ -8,7 +8,7 @@ int grabberY = 0;
 int lastBallPosX;
 float lastBallPosY;
 int grabberYMax = 1200;
-int numberOfTries = 5;
+int numberOfTries = 2;
 int currentTry = 0;
 float gravity = 10;
 int[] fallLimit = new int[numberOfTries];
@@ -20,7 +20,6 @@ String winner = "... Wins!";
 
 
 void setupGrijper() {
-  fullScreen();
   backgroundImg = loadImage("Grijper_Background.png");
   forgroundImg = loadImage("GrijperForground.png");
   grabber = loadImage("Grabber.png");
@@ -31,32 +30,38 @@ void setupGrijper() {
   }
 }
 
-void drawGrijper(int green, int purple, int orange, int blue, int red) {
+void drawGrijper(boolean start, int green, int purple, int orange, int blue, int red) {
   int winnerInput = 0;
   if(green == 1){
-    index = 0;
+    winnerInput = 0;
   }
     else if(purple == 1){
-    index = 0;
+    winnerInput = 1;
   }
     else if(orange == 1){
-    index = 0;
+    winnerInput = 2;
   }
     else if(blue == 1){
-    index = 0;
+    winnerInput = 3;
   }
     else if(red == 1){
-    index = 0;
+    winnerInput = 4;
   }
   
-  
-  if (currentTry < numberOfTries) {
+  if(start){
+      if (currentTry < numberOfTries) {
     backgroundImg();
     grabber(winnerInput);
     forgroundImg();
   } else {
     winningScreen(winnerInput);
   }
+  }
+  else{
+   backgroundImg();
+   forgroundImg();
+  }
+
 }
 
 void backgroundImg() {
@@ -139,19 +144,19 @@ void winningScreen(int winnerInput) {
   fill(0);
   switch(winnerInput) {
     case 0: 
-      winner = "Orange Wins!";
-      break;
-    case 1: 
-      winner = "Red Wins!";
-      break;
-    case 2: 
-      winner = "Blue Wins!";
-      break;
-    case 3: 
       winner = "Green Wins!";
       break;
-    case 4: 
+    case 1: 
       winner = "Purple Wins!";
+      break;
+    case 2: 
+      winner = "Orange Wins!";
+      break;
+    case 3: 
+      winner = "Blue Wins!";
+      break;
+    case 4: 
+      winner = "Red Wins!";
       break;
   }
   text(winner, 40, 800);
