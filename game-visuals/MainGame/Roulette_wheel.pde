@@ -108,6 +108,8 @@ void resetRouletteValues() {
   beginanimation = true;
   rouletteStartedSpinning = false;
   count = 0;
+  startRevealTime = 0;
+
   
 numbers = new int[][]{
   {3, color(255, 0, 0), 0}, {6, color(0, 0, 0), 0}, // Red
@@ -158,6 +160,7 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   drawZeroRectangle();
 
   if (start && !reveal && !rouletteStartedSpinning) {
+    animationStartedOrange = false; //This one is supposedly still on
     rouletteStartedSpinning = true;
     spinningRoulette = true;
     spinStartTime = millis();
