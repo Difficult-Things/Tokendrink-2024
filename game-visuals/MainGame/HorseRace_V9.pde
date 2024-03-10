@@ -1,7 +1,7 @@
 PImage background_mountains;
 PImage background_fence;
 PImage background_clouds;
-int start = 0;
+int horseStart = 0;
 int startingTime;
 
 void setupHorses() {
@@ -17,15 +17,29 @@ void idlePhaseHorses() {
   startingBackground();
 }
 
+void resetHorseValues(){
+   horseStart = 0;
+      xWinnerHorse = 0;
+      xSecondHorse = 0;
+      xThirdHorse = 0;
+      xFourthHorse = 0;
+      xLastHorse = 0;
+      xMountains = 0;
+      xFence = 0;
+      xClouds = 0;
+      xStart = 0;
+      xFinish = 1700;
+}
+
 void drawHorses(int green, int purple, int orange, int blue, int red) {
-  if ((start == 0)) {
-    start =1;
+  if ((horseStart == 0)) {
+    horseStart =1;
     startingTime = millis();
   }
-  if (start == 0) {
+  if (horseStart == 0) {
     startingBackground();
   }
-  if (start == 1) {
+  if (horseStart == 1) {
     movingBackground();
 
     horseGreen(getPosition(green));
