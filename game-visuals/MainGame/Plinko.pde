@@ -22,6 +22,8 @@ float colSpacing; // Declare colSpacing as a global variable
 int finishTime = 0;
 static int finishRevealTime = 5000;
 
+int countdownPlinko = 20;
+
 void resetPlinkoValues() {
   ballExists = false;
   ballDropping = false;
@@ -29,8 +31,8 @@ void resetPlinkoValues() {
   plinkoDirection = 20;
   hitCounter = 0; // Counter to track hits on X = 635 line
   finishTime = 0;
-    ballPlinko.position.y = squareTopLeft.y+BALL_SIZE/2;
-
+  ballPlinko.position.y = squareTopLeft.y+BALL_SIZE/2;
+  countdownPlinko = 20;
 }
 
 void setupPlinko() {
@@ -80,6 +82,8 @@ void drawPlinko(boolean start, int green, int purple, int orange, int blue, int 
   rect(squareTopLeft.x, squareTopLeft.y, rectWidth, rectHeight);
   drawOdds(start, green, purple, orange, blue, red);
 
+
+
   // Draw the pins and the ball as before
   for (PVector pin : pins) {
     fill(#333333);
@@ -91,6 +95,23 @@ void drawPlinko(boolean start, int green, int purple, int orange, int blue, int 
   fill(#000000);
   rect(0, 0, 120+PIN_SIZE, 1080);
   rect(1920, 0, -120-PIN_SIZE, 1080);
+
+  if (countdownPlinko >= 0) {
+
+    pushStyle();
+    textFont(Font1);
+    textAlign(CENTER);
+    fill(255, 0, 0);
+    if (countdownPlinko >= 0) {
+      text(countdownPlinko, width/2, height/2+180);
+    }
+    delay(1000);
+    popStyle();
+    countdownPlinko--;
+  }
+  if (countdownPlinko >= 0) {
+    return;
+  }
 
   if (!ballDropping) {
     plinkoX = plinkoX += plinkoDirection;

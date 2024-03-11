@@ -38,6 +38,8 @@ boolean beginanimation = true;
 boolean rouletteStartedSpinning = false;
 int count = 0;
 
+int countdownRoulette = 20;
+
 int winningnumber; //used for final animation
 
 static int redNumber = 1;
@@ -97,7 +99,7 @@ void resetRouletteValues() {
   ballSpeed = radians(2); // Initial speed of the ball
   ballRotation = 0; // Rotation of the ball
   spinningRoulette = false; // Flag to indicate if the wheel is spinning
-
+  countdownRoulette = 20;
   landedNumber = -1; // Number where the ball has landed
 
   landedBallSize = 10; // Initial size of the landed ball
@@ -138,7 +140,7 @@ void resetRouletteValues() {
 }
 
 void setupRoulette() {
-  Font1  = createFont("Arial Bold", 18);
+  Font1  = createFont("Arial Bold", 500);
   angleBetweenSlots = TWO_PI / numSlots;
 
   chipImageBlue = loadImage("BlueToken.png");
@@ -176,7 +178,9 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   drawBettingLayout();
   drawZeroRectangle();
 
-  if (start && !reveal && !rouletteStartedSpinning) {
+
+
+  if (start && !reveal && !rouletteStartedSpinning ) {
     animationStartedOrange = false; //This one is supposedly still on
     rouletteStartedSpinning = true;
     spinningRoulette = true;
@@ -207,7 +211,7 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
       drawChipOnNumber(i, purpleNumber);
     }
   }
-  if (!start && reveal) {
+  if (!start && reveal && countdownRoulette < 0) {
     revealRoulette(green, purple, orange, blue, red);
   }
   drawAllNumbers();
@@ -263,6 +267,19 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   if (revealWinnerTime != 0 && millis() - revealWinnerTime > revealWinnerDelay) {
 
     winningScreen(winningYear);
+  }
+
+  if (countdownRoulette >= 0) {
+
+    pushStyle();
+    textFont(Font1);
+    textAlign(CENTER);
+    if (countdownRoulette >= 0) {
+      text(countdownRoulette, width/2, height/2+180);
+    }
+    delay(1000);
+    popStyle();
+    countdownRoulette--;
   }
 }
 

@@ -4,6 +4,7 @@ PImage background_clouds;
 int horseStart = 0;
 int startingTime;
 PFont WinningFont;
+int countdownPaard = 20;
 void setupHorses() {
   noStroke();
   background(0);
@@ -30,9 +31,28 @@ void resetHorseValues() {
   xClouds = 0;
   xStart = 0;
   xFinish = 1700;
+  countdownPaard = 20;
 }
 
 void drawHorses(int green, int purple, int orange, int blue, int red) {
+  
+  if (countdownPaard >= 0) {
+    startingBackground();
+    pushStyle();
+    textFont(Font1);
+    textAlign(CENTER);
+    fill(255, 0, 0);
+    if (countdownPaard >= 0) {
+      text(countdownPaard, width/2, height/2+180);
+    }
+    delay(1000);
+    popStyle();
+    countdownPaard--;
+  }
+  if (countdownPaard >= 0) {
+    return;
+  }
+  
   if ((horseStart == 0)) {
     horseStart =1;
     startingTime = millis();
@@ -49,7 +69,7 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
     horseBlue(getPosition(blue));
     horseRed(getPosition(red));
   }
-  if (millis() > startingTime + 67000 && startingTime != 0) {
+  if (millis() > startingTime + 61000 && startingTime != 0) {
     pushStyle();
     String winningText = "";
     if (green == 1) {
@@ -69,6 +89,7 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
       winningText = "Team RED has won\r\n this year's tokendrink!";
     }
     textFont(WinningFont);
+    textAlign(CENTER);
     text(winningText, 900, 500);
     popStyle();
   }

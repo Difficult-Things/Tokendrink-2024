@@ -23,6 +23,8 @@ int[] thirthRound;
 int finishTimeSlots = 0;
 static int finishRevealTimeSlots = 8000;
 
+int countdownSlots = 20;
+
 void resetSlotValues() {
   finishTimeSlots = 0;
   currentIndex = 0;
@@ -32,6 +34,7 @@ void resetSlotValues() {
   row = 0;
   spinningCount = 0;
   winnerImage = 0;
+  countdownSlots = 20;
 }
 
 void setupSlots() {
@@ -71,6 +74,23 @@ void drawSlots(boolean start, int green, int purple, int orange, int blue, int r
     winnerImage = 8;
   }
   thirthRound = new int[]{winnerImage, winnerImage, winnerImage, winnerImage, winnerImage};
+
+  if (countdownSlots >= 0) {
+
+    pushStyle();
+    textFont(Font1);
+    textAlign(CENTER);
+    fill(255,0,0);
+    if (countdownSlots >= 0) {
+      text(countdownSlots, width/2, height/2+180);
+    }
+    delay(1000);
+    popStyle();
+    countdownSlots--;
+  }
+  if(countdownSlots >= 0){
+    return;
+  }
 
   // Spinning logic
   if (spinning == 1 && millis() - timer > interval) {
@@ -115,6 +135,8 @@ void drawSlots(boolean start, int green, int purple, int orange, int blue, int r
     }
     winningScreen(winningYear);
   }
+
+
 }
 
 void alignImagesTo(int[] round) {
