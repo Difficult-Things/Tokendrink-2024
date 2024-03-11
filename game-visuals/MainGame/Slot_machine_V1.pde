@@ -8,6 +8,8 @@ long startWaitTime = 0; // To track when we started waiting
 int spinning = 1; // Flag to control spinning
 int row = 0;
 PImage imgSlot;
+PImage backgroundSlots;
+
 int spinningCount = 0;
 int winnerImage = 0;
 
@@ -30,6 +32,7 @@ void resetSlotValues() {
 
 void setupSlots() {
   imgSlot = loadImage("image_slot_nobg.png");
+  backgroundSlots = loadImage("slots_tokendrink_background.png");
   for (int i = 0; i < imagesSlots.length; i++) {
     imagesSlots[i] = loadImage("slot_image_" + i + ".png");
   }
@@ -40,6 +43,11 @@ void drawSlots(boolean start, int green, int purple, int orange, int blue, int r
   imageMode(CENTER);
 
   background(255);
+  image(backgroundSlots, width / 2, height / 2);
+  pushStyle();
+  fill(255);
+  rect(300,400,1300,400);
+  popStyle();
   image(imgSlot, width / 2, height / 2);
 
   // Display images in fixed positions

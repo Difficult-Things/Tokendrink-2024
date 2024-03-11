@@ -24,7 +24,7 @@ PImage chipImagePurple; // Declare a PImage variable
 PImage chipImageOrange; // Declare a PImage variable
 PImage background; // Declare a PImage variable
 
-int numImages = 50; // Number of images to fall
+int numImages = 60; // Number of images to fall
 float[] imageX, imageY; // Arrays to store image positions
 float speed = 25; // Initial speed of falling images
 
@@ -45,6 +45,11 @@ static int greenNumber = 2;
 static int purpleNumber = 3;
 static int orangeNumber = 4;
 static int blueNumber = 5;
+
+PImage backgroundRoulette;
+
+
+static int chipSize = 50;
 
   PFont Font1;
 
@@ -83,7 +88,7 @@ int[][] numbers2 = {
 };
 
 //positions of the chips placed
-int[][] positions = new int[][]{{20, 10, 30, 29, 16, 13, 14, 6, 7, 34}, {5, 24, 1, 2, 12, 9, 31, 17, 23}, {28, 32, 3, 8, 34, 0, 19}, {21, 22, 33, 11, 18, 15}, {35, 25, 26, 27, 4}};
+int[][] positions = new int[][]{{20, 10, 30, 29, 9, 13, 14, 6, 7, 34}, {5, 24, 1, 2, 12, 16, 31, 17, 23}, {28, 32, 3, 8, 34, 0, 19}, {21, 22, 33, 11, 18, 15}, {35, 25, 26, 27, 4}};
 
 void resetRouletteValues() {
   wheelAngle = 0; // Initial angle of the wheel
@@ -139,7 +144,9 @@ void setupRoulette() {
   chipImageRed = loadImage("RedToken.png");
   chipImageGreen = loadImage("GreenToken.png");
   chipImagePurple = loadImage("PurpleToken.png");
-  background = loadImage("Board.png");
+  //background = loadImage("Board.png");
+    backgroundSlots = loadImage("slots_tokendrink_background.png");
+
 
   // Initialize arrays
   imageX = new float[numImages];
@@ -155,10 +162,14 @@ void setupRoulette() {
 void drawRoulette(boolean start, boolean reveal, int green, int purple, int orange, int blue, int red) {
   pushMatrix();
   pushStyle();
-  background(16, 120, 35);
+  //background(16, 120, 35);
+    image(backgroundSlots, 0,0);
+
   if (!start && !reveal) {
     drawFallingImagesSlow();
   }
+  scale(1.25, 1.25);
+  translate(-200,-100);
   drawWheel();
   drawBettingLayout();
   drawZeroRectangle();
@@ -175,18 +186,7 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
     landedBallSize = 10;
   }
 
-  if (spinningRoulette) {
-    spinWheel();
-    spinBall();
-  } else {
-    // If the wheel has stopped spinning, display the landed number
-    landedNumber = calculateLandedNumber();
-    if (millis() - spinStartTime > 3000) { // Adjust the delay time as needed (2000 milliseconds in this example)
-    count = 7; //IDK why this number anymore, was some logic behind it please kill me now (this was gino btw)
-      displayLandedBallAnimation(winningnumber);
-      
-    }
-  }
+
 
   drawBall();
 
@@ -208,6 +208,8 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   if (!start && reveal) {
     revealRoulette(green, purple, orange, blue, red);
   }
+    drawAllNumbers();
+
 
   if (animationStartedRed) {
     drawFallingImagesRed();
@@ -224,7 +226,35 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   if (animationStartedOrange) {
     drawFallingImagesOrange();
   }
-  drawAllNumbers();
+  
+    if (spinningRoulette) {
+    spinWheel();
+    spinBall();
+  } else {
+    // If the wheel has stopped spinning, display the landed number
+    landedNumber = calculateLandedNumber();
+    if (millis() - spinStartTime > 3000) { // Adjust the delay time as needed (2000 milliseconds in this example)
+    count = 7; //IDK why this number anymore, was some logic behind it please kill me now (this was gino btw)
+    int winningYear = 0;
+    if(red == 1){
+      winningYear = 1;
+    }
+    else if(purple == 1){
+     winningYear = 2; 
+    }
+        else if(blue == 1){
+     winningYear = 3; 
+    }
+        else if(green == 1){
+     winningYear = 4; 
+    }
+        else if(orange == 1){
+     winningYear = 5; 
+    }
+      displayLandedBallAnimation(winningYear);
+      
+    }
+  }
   popStyle();
   popMatrix();
 }
@@ -301,22 +331,23 @@ void drawChipOnNumber(int index, int yearColor) {
 
   noStroke();
   if (yearColor == redNumber) {
-    image(chipImageRed, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
+    image(chipImageRed, x - chipSize/2, y - chipSize/2, chipSize, chipSize); // Adjust the size of the image as needed
   } else if (yearColor == blueNumber) {
-    image(chipImageBlue, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
+    image(chipImageBlue, x - chipSize/2, y - chipSize/2, chipSize, chipSize); // Adjust the size of the image as needed
   } else if (yearColor == orangeNumber) {
-    image(chipImageOrange, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
+    image(chipImageOrange, x - chipSize/2, y - chipSize/2, chipSize, chipSize); // Adjust the size of the image as needed
   } else if (yearColor == greenNumber) {
-    image(chipImageGreen, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
+    image(chipImageGreen, x - chipSize/2, y - chipSize/2, chipSize, chipSize); // Adjust the size of the image as needed
   } else if (yearColor == purpleNumber) {
-    image(chipImagePurple, x - 20, y - 20, 40, 40); // Adjust the size of the image as needed
+    image(chipImagePurple, x - chipSize/2, y - chipSize/2, chipSize, chipSize); // Adjust the size of the image as needed
   }
 }
 
 //draw the turning wheel
 void drawWheel() {
   translate(width / 4 -40, height / 2+5);
-
+  fill(#5A5005);
+  circle(0,0,wheelRadius*2 + 40);
   for (int i = 0; i < numSlots; i++) {
     float startAngle = i * angleBetweenSlots;
     float endAngle = (i + 1) * angleBetweenSlots;
@@ -367,7 +398,6 @@ void spinWheel() {
 
   if (wheelAngle >= TWO_PI) {
     wheelAngle = 0;
-    spinningRoulette = false;
   }
 }
 
@@ -382,22 +412,25 @@ void spinBall() {
   }
 
   // Decrease ball speed gradually to simulate slowing down
-  ballSpeed *= 0.98;
+  ballSpeed = ballSpeed * 0.998;
+  
+  println(ballSpeed);
 
   // If the ball has slowed down enough, stop the ball
-  if (abs(ballSpeed) < 0.01) {
+  if (abs(ballSpeed) < 0.0001) {
+    spinningRoulette = false;
     ballSpeed = 0;
   }
 }
 
-void displayLandedNumber() {
-  pushStyle();
-  fill(0);
-  textSize(50);
-  textAlign(CENTER, CENTER);
-  text("Landed on: " + landedNumber, 550, 250);
-  popStyle();
-}
+//void displayLandedNumber() {
+//  pushStyle();
+//  fill(0);
+//  textSize(50);
+//  textAlign(CENTER, CENTER);
+//  text("Landed on: " + landedNumber, 550, 250);
+//  popStyle();
+//}
 
 int calculateLandedNumber() {
   // Calculate the landed number based on the current ball angle
@@ -542,18 +575,18 @@ void displayLandedBallAnimation(int winning) {
     fill(255);
     textSize(50);
     textAlign(CENTER, CENTER);
-    text(landedNumber, 0, 0);
+    text(9, 0, 0);
 
     //if Red is winning, red coins will fly down. These appear when you click once more after spinning
     if (winning == 1 && count==7) {
       for (int i = 0; i < numImages; i++) {
-        numImages = 40;
+        numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
         image(chipImageRed, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
         image(chipImageRed, imageX[i]-600, imageY[i], 100, 100); // Adjust the size as needed
 
-        if (imageY[i] > height) {
-          imageY[i] = random(-1000, 0); // Reset the position above the window
+        if (imageY[i] > height -600) {
+          imageY[i] = random(-2000, - 1000); // Reset the position above the window
         }
       }
     }
@@ -561,13 +594,13 @@ void displayLandedBallAnimation(int winning) {
     //if Purple is winning, purple coins will fly down. These appear when you click once more after spinning
     if (winning == 2 && count==7) {
       for (int i = 0; i < numImages; i++) {
-        numImages = 40;
+        numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
         image(chipImagePurple, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
         image(chipImagePurple, imageX[i]-600, imageY[i], 100, 100); // Adjust the size as needed
 
-        if (imageY[i] > height) {
-          imageY[i] = random(-1000, 0); // Reset the position above the window
+        if (imageY[i] > height -600) {
+          imageY[i] = random(-2000, - 1000); // Reset the position above the window
         }
       }
     }
@@ -576,13 +609,13 @@ void displayLandedBallAnimation(int winning) {
     if (winning == 3 && count==7) {
 
       for (int i = 0; i < numImages; i++) {
-        numImages = 40;
+        numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
         image(chipImageBlue, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
         image(chipImageBlue, imageX[i]-600, imageY[i], 100, 100); // Adjust the size as needed
 
-        if (imageY[i] > height) {
-          imageY[i] = random(-1000, 0); // Reset the position above the window
+        if (imageY[i] > height -600) {
+          imageY[i] = random(-2000, - 1000); // Reset the position above the window
         }
       }
     }
@@ -590,13 +623,13 @@ void displayLandedBallAnimation(int winning) {
     //if Green is winning, green coins will fly down. These appear when you click once more after spinning
     if (winning == 4 && count==7) {
       for (int i = 0; i < numImages; i++) {
-        numImages = 40;
+        numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
         image(chipImageGreen, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
         image(chipImageGreen, imageX[i]-600, imageY[i], 100, 100); // Adjust the size as needed
 
-        if (imageY[i] > height) {
-          imageY[i] = random(-1000, 0); // Reset the position above the window
+        if (imageY[i] > height -600) {
+          imageY[i] = random(-2000, - 1000); // Reset the position above the window
         }
       }
     }
@@ -604,20 +637,20 @@ void displayLandedBallAnimation(int winning) {
     //if Orange is winning, orange coins will fly down. These appear when you click once more after spinning
     if (winning == 5 && count==7) {
       for (int i = 0; i < numImages; i++) {
-        numImages = 40;
+        numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
         image(chipImageOrange, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
         image(chipImageOrange, imageX[i]-600, imageY[i], 100, 100); // Adjust the size as needed
 
-        if (imageY[i] > height) {
-          imageY[i] = random(-1000, 0); // Reset the position above the window
+        if (imageY[i] > height -600) {
+          imageY[i] = random(-2000, - 1000); // Reset the position above the window
         }
       }
     }
 
     for (int i = 0; i < numbers2.length; i++) {
       if (numbers2[i][0] == landedNumber) {
-        text(numbers2[i][0], 0, 0); // Display the landed number inside the ball
+        text(9, 0, 0); // Display the landed number inside the ball
         break;
       }
     }
@@ -660,6 +693,7 @@ void drawFallingImagesSlow() {
 //voids for the tokens falling down, after these have fallen, the fiches will show on the board
 void drawFallingImagesRed() {
   // Update and draw falling images
+  numImages = 20;
   for (int i = 0; i < numImages; i++) {
     imageY[i] += speed; // Adjust the speed as needed
     image(chipImageRed, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
@@ -668,6 +702,7 @@ void drawFallingImagesRed() {
 
 void drawFallingImagesPurple() {
   // Update and draw falling images
+  numImages = 20;
   for (int i = 0; i < numImages; i++) {
     imageY[i] += speed; // Adjust the speed as needed
     image(chipImagePurple, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
@@ -676,6 +711,7 @@ void drawFallingImagesPurple() {
 
 void drawFallingImagesBlue() {
   // Update and draw falling images
+  numImages = 20;
   for (int i = 0; i < numImages; i++) {
     imageY[i] += speed; // Adjust the speed as needed
     image(chipImageBlue, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
@@ -684,6 +720,7 @@ void drawFallingImagesBlue() {
 
 void drawFallingImagesGreen() {
   // Update and draw falling images
+  numImages = 20;
   for (int i = 0; i < numImages; i++) {
     imageY[i] += speed; // Adjust the speed as needed
     image(chipImageGreen, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
@@ -692,6 +729,7 @@ void drawFallingImagesGreen() {
 
 void drawFallingImagesOrange() {
   // Update and draw falling images
+  numImages = 20;
   for (int i = 0; i < numImages; i++) {
     imageY[i] += speed; // Adjust the speed as needed
     image(chipImageOrange, imageX[i], imageY[i], 100, 100); // Adjust the size as needed
