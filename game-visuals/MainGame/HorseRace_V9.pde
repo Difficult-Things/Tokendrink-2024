@@ -49,7 +49,7 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
     horseBlue(getPosition(blue));
     horseRed(getPosition(red));
   }
-  if (millis() > startingTime + 300 && startingTime != 0) {
+  if (millis() > startingTime + 67000 && startingTime != 0) {
     pushStyle();
     String winningText = "";
     if (green == 1) {
