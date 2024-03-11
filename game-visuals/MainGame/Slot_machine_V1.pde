@@ -29,16 +29,18 @@ void resetSlotValues() {
 }
 
 void setupSlots() {
-  imgSlot = loadImage("image_slot.png");
+  imgSlot = loadImage("image_slot_nobg.png");
   for (int i = 0; i < imagesSlots.length; i++) {
     imagesSlots[i] = loadImage("slot_image_" + i + ".png");
   }
 }
 
 void drawSlots(boolean start, int green, int purple, int orange, int blue, int red) {
+  pushStyle();
+  imageMode(CENTER);
+
   background(255);
   image(imgSlot, width / 2, height / 2);
-  imageMode(CENTER);
 
   // Display images in fixed positions
   for (int i = 0; i < 5; i++) {
@@ -81,6 +83,7 @@ void drawSlots(boolean start, int green, int purple, int orange, int blue, int r
       alignImagesTo(thirthRound);
     }
   }
+  popStyle();
 }
 
 void alignImagesTo(int[] round) {

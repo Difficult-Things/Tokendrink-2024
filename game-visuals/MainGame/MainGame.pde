@@ -1,13 +1,20 @@
 JSONObject gameState;
+import processing.video.*;
 
 
+Movie rouletteVideo;
+Movie slotsVideo;
+Movie plinkoVideo;
+Movie grijperVideo;
+Movie paardenVideo;
 
 
 
 void setup() {
-  //fullScreen();
-  size(1920, 1080);
-  gameState = parseJSONObject("{\"round\":1,\"state\":\"drinking\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
+  fullScreen(2);
+    grijperVideo = new Movie(this, "Claw Machine Screensaver.mp4");
+  //size(1920, 1080);
+  gameState = parseJSONObject("{\"round\":4,\"state\":\"drinking\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
   setupHorses();
   setupGrijper();
   setupSlots();
@@ -57,13 +64,19 @@ void draw() {
   case 4:
     switch(state) {
     case "drinking":
+      grijperVideo.loop();
+      pushStyle();
+      grijperVideo(width,height);
+      image(grijperVideo, 0, 0);
       resetGrijperValues();
-      drawGrijper(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      popStyle();
+      //drawGrijper(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     case "reveal":
       drawGrijper(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     case "play":
+    grijperVideo.stop();
       drawGrijper(true, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     }

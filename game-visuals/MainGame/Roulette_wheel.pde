@@ -153,6 +153,8 @@ void setupRoulette() {
 }
 
 void drawRoulette(boolean start, boolean reveal, int green, int purple, int orange, int blue, int red) {
+  pushMatrix();
+  pushStyle();
   background(16, 120, 35);
   if (!start && !reveal) {
     drawFallingImagesSlow();
@@ -223,6 +225,8 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
     drawFallingImagesOrange();
   }
   drawAllNumbers();
+  popStyle();
+  popMatrix();
 }
 
 //reveal the red chips on the board, redPos decides the winning color
@@ -331,12 +335,14 @@ void drawWheel() {
 
     // Draw number in the middle of the section
     pushMatrix();
+    pushStyle();
     rotate(startAngle + angleBetweenSlots / 2);
     translate(wheelRadius * 0.8, 0); // Adjust the distance from the center
     fill(255);
     textAlign(CENTER, CENTER);
     textSize(12);
     text(numbers2[i][0], 0, 0); // Draw number
+    popStyle();
     popMatrix();
   }
 }
@@ -385,10 +391,12 @@ void spinBall() {
 }
 
 void displayLandedNumber() {
+  pushStyle();
   fill(0);
   textSize(50);
   textAlign(CENTER, CENTER);
   text("Landed on: " + landedNumber, 550, 250);
+  popStyle();
 }
 
 int calculateLandedNumber() {
