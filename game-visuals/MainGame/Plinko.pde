@@ -19,8 +19,18 @@ int hitCounter = 0; // Counter to track hits on X = 635 line
 
 float colSpacing; // Declare colSpacing as a global variable
 
-void resetPlinkoValues(){
-  
+int finishTime = 0;
+static int finishRevealTime = 5000;
+
+void resetPlinkoValues() {
+  ballExists = false;
+  ballDropping = false;
+  plinkoX = 800;
+  plinkoDirection = 20;
+  hitCounter = 0; // Counter to track hits on X = 635 line
+  finishTime = 0;
+    ballPlinko.position.y = squareTopLeft.y+BALL_SIZE/2;
+
 }
 
 void setupPlinko() {
@@ -105,6 +115,25 @@ void drawPlinko(boolean start, int green, int purple, int orange, int blue, int 
     ballPlinko.update();
     ballPlinko.display();
     ballPlinko.checkCollision(pins, PIN_SIZE);
+  }
+
+  if (ballPlinko.position.y >= height - ballPlinko.radius - 5 && finishTime == 0) {
+    finishTime = millis();
+  }
+  if (finishTime != 0 && millis() - finishTime > finishRevealTime) {
+    int winningYear = -1;
+    if (green == 1) {
+      winningYear = 0;
+    } else if (purple == 1) {
+      winningYear = 1;
+    } else if (orange == 1) {
+      winningYear = 2;
+    } else if (blue == 1) {
+      winningYear = 3;
+    } else if (red == 1) {
+      winningYear = 4;
+    }
+    winningScreen(winningYear);
   }
 }
 
@@ -197,7 +226,6 @@ void drawOdds(boolean start, int green, int purple, int orange, int blue, int re
   else if (blue == 1) fill(#3280EA);
   else if (red == 1) fill(#BA0C2F);
 
-println(green);
 
 
   rect(120+PIN_SIZE+colSpacing*3, 1080, colSpacing, -60);

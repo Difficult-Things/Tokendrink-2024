@@ -48,10 +48,11 @@ static int blueNumber = 5;
 
 PImage backgroundRoulette;
 
-
+int revealWinnerTime = 0;
+static int revealWinnerDelay = 8000;
 static int chipSize = 50;
 
-  PFont Font1;
+PFont Font1;
 
 //numbers of the layout board
 int[][] numbers = {
@@ -117,22 +118,23 @@ void resetRouletteValues() {
   count = 0;
   startRevealTime = 0;
 
-  
-numbers = new int[][]{
-  {3, color(255, 0, 0), 0}, {6, color(0, 0, 0), 0}, // Red
-  {9, color(255, 0, 0), 0}, {12, color(255, 0, 0), 0}, {15, color(0, 0, 0), 0}, // Black
-  {18, color(255, 0, 0), 0}, {21, color(255, 0, 0), 0}, {24, color(0, 0, 0), 0}, // Red
-  {27, color(255, 0, 0), 0}, {30, color(255, 0, 0), 0}, {33, color(0, 0, 0), 0}, // Black
-  {36, color(255, 0, 0), 0}, {2, color(0, 0, 0), 0}, {5, color(255, 0, 0), 0}, // Red
-  {8, color(0, 0, 0), 0}, {11, color(0, 0, 0), 0}, {14, color(255, 0, 0), 0}, // Black
-  {17, color(0, 0, 0), 0}, {20, color(0, 0, 0), 0}, {23, color(255, 0, 0), 0}, // Red
-  {26, color(0, 0, 0), 0}, {29, color(0, 0, 0), 0}, {32, color(255, 0, 0), 0}, // Black
-  {35, color(0, 0, 0), 0}, {1, color(255, 0, 0), 0}, {4, color(0, 0, 0), 0}, // Red
-  {7, color(255, 0, 0), 0}, {10, color(0, 0, 0), 0}, {13, color(0, 0, 0), 0}, // Black
-  {16, color(255, 0, 0), 0}, {19, color(255, 0, 0), 0}, {22, color(0, 0, 0), 0}, // Red
-  {25, color(255, 0, 0), 0}, {28, color(0, 0, 0), 0}, {31, color(0, 0, 0), 0}, // Red
-  {34, color(255, 0, 0), 0}
-};
+
+  numbers = new int[][]{
+    {3, color(255, 0, 0), 0}, {6, color(0, 0, 0), 0}, // Red
+    {9, color(255, 0, 0), 0}, {12, color(255, 0, 0), 0}, {15, color(0, 0, 0), 0}, // Black
+    {18, color(255, 0, 0), 0}, {21, color(255, 0, 0), 0}, {24, color(0, 0, 0), 0}, // Red
+    {27, color(255, 0, 0), 0}, {30, color(255, 0, 0), 0}, {33, color(0, 0, 0), 0}, // Black
+    {36, color(255, 0, 0), 0}, {2, color(0, 0, 0), 0}, {5, color(255, 0, 0), 0}, // Red
+    {8, color(0, 0, 0), 0}, {11, color(0, 0, 0), 0}, {14, color(255, 0, 0), 0}, // Black
+    {17, color(0, 0, 0), 0}, {20, color(0, 0, 0), 0}, {23, color(255, 0, 0), 0}, // Red
+    {26, color(0, 0, 0), 0}, {29, color(0, 0, 0), 0}, {32, color(255, 0, 0), 0}, // Black
+    {35, color(0, 0, 0), 0}, {1, color(255, 0, 0), 0}, {4, color(0, 0, 0), 0}, // Red
+    {7, color(255, 0, 0), 0}, {10, color(0, 0, 0), 0}, {13, color(0, 0, 0), 0}, // Black
+    {16, color(255, 0, 0), 0}, {19, color(255, 0, 0), 0}, {22, color(0, 0, 0), 0}, // Red
+    {25, color(255, 0, 0), 0}, {28, color(0, 0, 0), 0}, {31, color(0, 0, 0), 0}, // Red
+    {34, color(255, 0, 0), 0}
+  };
+  revealWinnerTime = 0;
 }
 
 void setupRoulette() {
@@ -145,7 +147,7 @@ void setupRoulette() {
   chipImageGreen = loadImage("GreenToken.png");
   chipImagePurple = loadImage("PurpleToken.png");
   //background = loadImage("Board.png");
-    backgroundSlots = loadImage("slots_tokendrink_background.png");
+  backgroundSlots = loadImage("slots_tokendrink_background.png");
 
 
   // Initialize arrays
@@ -163,13 +165,13 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   pushMatrix();
   pushStyle();
   //background(16, 120, 35);
-    image(backgroundSlots, 0,0);
+  image(backgroundSlots, 0, 0);
 
   if (!start && !reveal) {
     drawFallingImagesSlow();
   }
   scale(1.25, 1.25);
-  translate(-200,-100);
+  translate(-200, -100);
   drawWheel();
   drawBettingLayout();
   drawZeroRectangle();
@@ -208,7 +210,7 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   if (!start && reveal) {
     revealRoulette(green, purple, orange, blue, red);
   }
-    drawAllNumbers();
+  drawAllNumbers();
 
 
   if (animationStartedRed) {
@@ -226,37 +228,42 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
   if (animationStartedOrange) {
     drawFallingImagesOrange();
   }
-  
-    if (spinningRoulette) {
+  int winningYear = 0;
+
+  if (spinningRoulette) {
     spinWheel();
     spinBall();
   } else {
     // If the wheel has stopped spinning, display the landed number
     landedNumber = calculateLandedNumber();
     if (millis() - spinStartTime > 3000) { // Adjust the delay time as needed (2000 milliseconds in this example)
-    count = 7; //IDK why this number anymore, was some logic behind it please kill me now (this was gino btw)
-    int winningYear = 0;
-    if(red == 1){
-      winningYear = 1;
-    }
-    else if(purple == 1){
-     winningYear = 2; 
-    }
-        else if(blue == 1){
-     winningYear = 3; 
-    }
-        else if(green == 1){
-     winningYear = 4; 
-    }
-        else if(orange == 1){
-     winningYear = 5; 
-    }
-      displayLandedBallAnimation(winningYear);
-      
+      count = 7; //IDK why this number anymore, was some logic behind it please kill me now (this was gino btw)
+      if (green == 1) {
+        winningYear = 0;
+      } else if (purple == 1) {
+        winningYear = 1;
+      } else if (orange == 1) {
+        winningYear = 2;
+      } else if (blue == 1) {
+        winningYear = 3;
+      } else if (red == 1) {
+        winningYear = 4;
+      }
+      if (revealWinnerTime == 0 && start) {
+        revealWinnerTime = millis();
+      }
+      //println(revealWinnerTime);
+      if (revealWinnerTime != 0 && millis() - revealWinnerTime < revealWinnerDelay) {
+        displayLandedBallAnimation(winningYear);
+      }
     }
   }
   popStyle();
   popMatrix();
+  if (revealWinnerTime != 0 && millis() - revealWinnerTime > revealWinnerDelay) {
+
+    winningScreen(winningYear);
+  }
 }
 
 //reveal the red chips on the board, redPos decides the winning color
@@ -347,7 +354,7 @@ void drawChipOnNumber(int index, int yearColor) {
 void drawWheel() {
   translate(width / 4 -40, height / 2+5);
   fill(#5A5005);
-  circle(0,0,wheelRadius*2 + 40);
+  circle(0, 0, wheelRadius*2 + 40);
   for (int i = 0; i < numSlots; i++) {
     float startAngle = i * angleBetweenSlots;
     float endAngle = (i + 1) * angleBetweenSlots;
@@ -413,8 +420,8 @@ void spinBall() {
 
   // Decrease ball speed gradually to simulate slowing down
   ballSpeed = ballSpeed * 0.998;
-  
-  println(ballSpeed);
+
+  //println(ballSpeed);
 
   // If the ball has slowed down enough, stop the ball
   if (abs(ballSpeed) < 0.0001) {
@@ -578,7 +585,7 @@ void displayLandedBallAnimation(int winning) {
     text(9, 0, 0);
 
     //if Red is winning, red coins will fly down. These appear when you click once more after spinning
-    if (winning == 1 && count==7) {
+    if (winning == 4 && count==7) {
       for (int i = 0; i < numImages; i++) {
         numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
@@ -592,7 +599,7 @@ void displayLandedBallAnimation(int winning) {
     }
 
     //if Purple is winning, purple coins will fly down. These appear when you click once more after spinning
-    if (winning == 2 && count==7) {
+    if (winning == 1 && count==7) {
       for (int i = 0; i < numImages; i++) {
         numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
@@ -621,7 +628,7 @@ void displayLandedBallAnimation(int winning) {
     }
 
     //if Green is winning, green coins will fly down. These appear when you click once more after spinning
-    if (winning == 4 && count==7) {
+    if (winning == 0 && count==7) {
       for (int i = 0; i < numImages; i++) {
         numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
@@ -635,7 +642,7 @@ void displayLandedBallAnimation(int winning) {
     }
 
     //if Orange is winning, orange coins will fly down. These appear when you click once more after spinning
-    if (winning == 5 && count==7) {
+    if (winning == 2 && count==7) {
       for (int i = 0; i < numImages; i++) {
         numImages = 25;
         imageY[i] += speed * 0.5; // Adjust the speed as needed (slower)
@@ -809,8 +816,8 @@ void drawBettingLayout() {
   }
 }
 
-void drawAllNumbers(){
-    float cellWidth = width / 25;
+void drawAllNumbers() {
+  float cellWidth = width / 25;
   float cellHeight = height / 15;
 
   for (int i = 0; i < numbers.length; i++) {
@@ -826,18 +833,16 @@ void drawNumberCell(float x, float y, float w, float h, int number, color cellCo
   fill(cellColor);
   stroke(255);  // White stroke color
   rect(x, y, w, h);
-
-
 }
 
-void drawNumberOnCell(float x, float y, float w, float h, int number){
+void drawNumberOnCell(float x, float y, float w, float h, int number) {
   pushStyle();
   fill(255);
-  circle(x+w/2,y+h/2,28);
-   fill(0);
+  circle(x+w/2, y+h/2, 32);
+  fill(0);
   textSize(20);
   textAlign(CENTER, CENTER);
-  text(Integer.toString(number), x + w / 2, y + h / 2-2);
+  text(Integer.toString(number), x + w / 2, y + h / 2-6);
   popStyle();
 }
 

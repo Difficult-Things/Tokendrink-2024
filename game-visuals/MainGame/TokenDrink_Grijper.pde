@@ -149,28 +149,3 @@ void ball() {
     }
   }
 }
-
-void winningScreen(int winnerInput) {
-  background(255, 255, 255);
-  textSize(128);
-  fill(0);
-  switch(winnerInput) {
-    case 0: 
-      winner = "Green Wins!";
-      break;
-    case 1: 
-      winner = "Purple Wins!";
-      break;
-    case 2: 
-      winner = "Orange Wins!";
-      break;
-    case 3: 
-      winner = "Blue Wins!";
-      break;
-    case 4: 
-      winner = "Red Wins!";
-      break;
-  }
-  text(winner, 40, 800);
-  image(dave, 0, 0);
-}

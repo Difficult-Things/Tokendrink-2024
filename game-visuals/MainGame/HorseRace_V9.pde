@@ -3,32 +3,33 @@ PImage background_fence;
 PImage background_clouds;
 int horseStart = 0;
 int startingTime;
-
+PFont WinningFont;
 void setupHorses() {
   noStroke();
   background(0);
   background_mountains = loadImage("mountains_TokenDrink.png");
   background_fence = loadImage("fence_TokenDrink.png");
   background_clouds = loadImage("clouds_TokenDrink.png");
+  WinningFont = createFont("Arial Bold", 110);
 }
 
-//This function is what is shown during the drinking phase aka the 15 minutes
+//This function is what is shown during the idle phase aka the 15 minutes
 void idlePhaseHorses() {
   startingBackground();
 }
 
-void resetHorseValues(){
-   horseStart = 0;
-      xWinnerHorse = 0;
-      xSecondHorse = 0;
-      xThirdHorse = 0;
-      xFourthHorse = 0;
-      xLastHorse = 0;
-      xMountains = 0;
-      xFence = 0;
-      xClouds = 0;
-      xStart = 0;
-      xFinish = 1700;
+void resetHorseValues() {
+  horseStart = 0;
+  xWinnerHorse = 0;
+  xSecondHorse = 0;
+  xThirdHorse = 0;
+  xFourthHorse = 0;
+  xLastHorse = 0;
+  xMountains = 0;
+  xFence = 0;
+  xClouds = 0;
+  xStart = 0;
+  xFinish = 1700;
 }
 
 void drawHorses(int green, int purple, int orange, int blue, int red) {
@@ -47,6 +48,29 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
     horseOrange(getPosition(orange));
     horseBlue(getPosition(blue));
     horseRed(getPosition(red));
+  }
+  if (millis() > startingTime + 300 && startingTime != 0) {
+    pushStyle();
+    String winningText = "";
+    if (green == 1) {
+      fill(#009040);
+      winningText = "Team GREEN has won\r\n this year's tokendrink!";
+    } else if (orange == 1) {
+      fill(#EC681C);
+      winningText = "Team ORANGE has won\r\n this year's tokendrink!";
+    } else if (purple == 1) {
+      fill(#7724DE);
+      winningText = "Team PURPLE has won\r\n this year's tokendrink!";
+    } else if (blue == 1) {
+      fill(#3280EA);
+      winningText = "Team BLUE has won\r\n this year's tokendrink!";
+    } else if (red == 1) {
+      fill(#BA0C2F);
+      winningText = "Team RED has won\r\n this year's tokendrink!";
+    }
+    textFont(WinningFont);
+    text(winningText, 900, 500);
+    popStyle();
   }
 }
 

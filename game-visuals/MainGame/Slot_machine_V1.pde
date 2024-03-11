@@ -20,7 +20,11 @@ int[] firstRound = new int[]{2, 2, 8, 2, 4};
 int[] secondRound = new int[]{2, 2, 2, 2, 4};
 int[] thirthRound;
 
+int finishTimeSlots = 0;
+static int finishRevealTimeSlots = 8000;
+
 void resetSlotValues() {
+  finishTimeSlots = 0;
   currentIndex = 0;
   timer = 0;
   startWaitTime = 0; // To track when we started waiting
@@ -46,7 +50,7 @@ void drawSlots(boolean start, int green, int purple, int orange, int blue, int r
   image(backgroundSlots, width / 2, height / 2);
   pushStyle();
   fill(255);
-  rect(300,400,1300,400);
+  rect(300, 400, 1300, 400);
   popStyle();
   image(imgSlot, width / 2, height / 2);
 
@@ -89,9 +93,28 @@ void drawSlots(boolean start, int green, int purple, int orange, int blue, int r
       alignImagesTo(secondRound);
     } else if (spinning == 2 && spinningCount == 2) {
       alignImagesTo(thirthRound);
+      if (finishTimeSlots == 0) {
+        finishTimeSlots = millis();
+      }
     }
   }
   popStyle();
+
+  if (finishTimeSlots != 0 && millis() - finishTimeSlots > finishRevealTimeSlots) {
+    int winningYear = -1;
+    if (green == 1) {
+      winningYear = 0;
+    } else if (purple == 1) {
+      winningYear = 1;
+    } else if (orange == 1) {
+      winningYear = 2;
+    } else if (blue == 1) {
+      winningYear = 3;
+    } else if (red == 1) {
+      winningYear = 4;
+    }
+    winningScreen(winningYear);
+  }
 }
 
 void alignImagesTo(int[] round) {

@@ -11,10 +11,10 @@ Movie paardenVideo;
 
 
 void setup() {
-  fullScreen(2);
+  //fullScreen(2);
 
 
-  //size(1920, 1080);
+  size(1920, 1080);
   gameState = parseJSONObject("{\"round\":1,\"state\":\"drinking\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
   setupHorses();
   setupGrijper();
@@ -148,6 +148,31 @@ void draw() {
     break;
     // code block
   }
+}
+
+void winningScreen(int winnerInput) {
+  background(255, 255, 255);
+  textSize(128);
+  fill(0);
+  switch(winnerInput) {
+    case 0: 
+      winner = "Green Wins!";
+      break;
+    case 1: 
+      winner = "Purple Wins!";
+      break;
+    case 2: 
+      winner = "Orange Wins!";
+      break;
+    case 3: 
+      winner = "Blue Wins!";
+      break;
+    case 4: 
+      winner = "Red Wins!";
+      break;
+  }
+  text(winner, 40, 800);
+  image(dave, 0, 0);
 }
 
 void movieEvent(Movie m) {
