@@ -18,6 +18,7 @@ void setup() {
   gameState = parseJSONObject("{\"round\":1,\"state\":\"drinking\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
   setupHorses();
   setupGrijper();
+  setupPlinko();
   setupSlots();
   setupRoulette();
   
@@ -83,6 +84,25 @@ void draw() {
     }
     break;
   case 3:
+   switch(state) {
+    case "drinking":
+      pushStyle();
+      plinkoVideo.play();
+      if (is_movie_finished(plinkoVideo)) {
+        plinkoVideo.jump(0);
+      }
+      image(plinkoVideo, 0, 0);
+      popStyle();
+      resetPlinkoValues();
+      break;
+    case "reveal":
+      drawPlinko(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      break;
+    case "play":
+      drawPlinko(true, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      break;
+    }
+    break;
   case 4:
     switch(state) {
     case "drinking":
