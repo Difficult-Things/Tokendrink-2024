@@ -1,17 +1,30 @@
 int a = -10;
 int b = -5;
-int lastHorseFrame;
+int lastHorseFrame=1;
+
+int moveGreen = 0;
+int movePurple=0;
+int moveBlue=0;
+int moveRed=0;
+int moveOrange=0;
+
+int green;
+int purple;
+int red;
+int blue;
+int orange;
 
 void baseHorse(int xSpot, int ySpot,color accent1, color accent2, int move){
   noStroke();
   if (millis()>6000+startingTime&& millis()<6100+startingTime){
     startingFrames=frameCount;
   }
-  if((frameCount-startingFrames == a+10)&&(xSpot<500)){
+   
+  if((frameCount-startingFrames == a+10)&& move==1){
     lastHorseFrame=1;
     a = frameCount-startingFrames;
   }
-  if(lastHorseFrame==1){
+  if((lastHorseFrame==1)||(move==0)){
     horse1accent1.disableStyle();
     horse1accent2.disableStyle();
     
@@ -24,7 +37,7 @@ void baseHorse(int xSpot, int ySpot,color accent1, color accent2, int move){
     
     
   }
-  if((frameCount-startingFrames == b+10) /*&&( millis()>6000+startingTime)*/&&move ==1){
+  if((frameCount-startingFrames == b+10)&&move ==1){
     lastHorseFrame=2;
     b = frameCount-startingFrames;
   } 
@@ -45,17 +58,13 @@ void baseHorse(int xSpot, int ySpot,color accent1, color accent2, int move){
 void horseGreen(int xGreen){
   if(getPosition(green)==winningHorse()){
     moveGreen=moveWinner();
-  }
-  if (getPosition(green)==secondHorse()){
+  }else if (getPosition(green)==secondHorse()){
     moveGreen=moveSecond(); 
-  }
-  if(getPosition(green)==thirdHorse()){
+  }else if(getPosition(green)==thirdHorse()){
     moveGreen=moveThird();
-  }
-  if(getPosition(green)==fourthHorse()){
+  }else if(getPosition(green)==fourthHorse()){
    moveGreen=moveFourth(); 
-  }
-  if(getPosition(green)==lastHorse()){
+  }else if(getPosition(green)==lastHorse()){
    moveGreen=moveLast(); 
   }
   
@@ -65,17 +74,13 @@ void horseGreen(int xGreen){
 void horsePurple(int xPurple){
    if(getPosition(purple)==winningHorse()){
     movePurple=moveWinner();
-  }
-  if (getPosition(purple)==secondHorse()){
+  }else if (getPosition(purple)==secondHorse()){
     movePurple=moveSecond(); 
-  }
-  if(getPosition(purple)==thirdHorse()){
+  }else if(getPosition(purple)==thirdHorse()){
     movePurple=moveThird();
-  }
-  if(getPosition(purple)==fourthHorse()){
+  }else if(getPosition(purple)==fourthHorse()){
    movePurple=moveFourth(); 
-  }
-  if(getPosition(purple)==lastHorse()){
+  }else if(getPosition(purple)==lastHorse()){
    movePurple=moveLast(); 
   }
   
@@ -85,17 +90,13 @@ void horsePurple(int xPurple){
 void horseBlue(int xBlue){
   if(getPosition(blue)==winningHorse()){
     moveBlue=moveWinner();
-  }
-  if (getPosition(blue)==secondHorse()){
+  }else if (getPosition(blue)==secondHorse()){
     moveBlue=moveSecond(); 
-  }
-  if(getPosition(blue)==thirdHorse()){
+  }else if(getPosition(blue)==thirdHorse()){
     moveBlue=moveThird();
-  }
-  if(getPosition(blue)==fourthHorse()){
+  }else if(getPosition(blue)==fourthHorse()){
    moveBlue=moveFourth(); 
-  }
-  if(getPosition(blue)==lastHorse()){
+  }else if(getPosition(blue)==lastHorse()){
    moveBlue=moveLast(); 
   }
   
@@ -106,17 +107,13 @@ void horseBlue(int xBlue){
 void horseRed(int xRed){
    if(getPosition(red)==winningHorse()){
     moveRed=moveWinner();
-  }
-  if (getPosition(red)==secondHorse()){
+  }else if (getPosition(red)==secondHorse()){
     moveRed=moveSecond(); 
-  }
-  if(getPosition(red)==thirdHorse()){
+  }else if(getPosition(red)==thirdHorse()){
     moveRed=moveThird();
-  }
-  if(getPosition(red)==fourthHorse()){
+  }else if(getPosition(red)==fourthHorse()){
    moveRed=moveFourth(); 
-  }
-  if(getPosition(red)==lastHorse()){
+  }else if(getPosition(red)==lastHorse()){
    moveRed=moveLast(); 
   }
   
@@ -126,17 +123,13 @@ void horseRed(int xRed){
 void horseOrange(int xOrange){
    if(getPosition(orange)==winningHorse()){
     moveOrange=moveWinner();
-  }
-  if (getPosition(orange)==secondHorse()){
+  } else if (getPosition(orange)==secondHorse()){
     moveOrange=moveSecond(); 
-  }
-  if(getPosition(orange)==thirdHorse()){
+  }else if(getPosition(orange)==thirdHorse()){
     moveOrange=moveThird();
-  }
-  if(getPosition(orange)==fourthHorse()){
+  }else if(getPosition(orange)==fourthHorse()){
    moveOrange=moveFourth(); 
-  }
-  if(getPosition(orange)==lastHorse()){
+  }else if(getPosition(orange)==lastHorse()){
    moveOrange=moveLast(); 
   }
   

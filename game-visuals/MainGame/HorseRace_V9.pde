@@ -13,8 +13,7 @@ PShape horse2;
 PShape horse2accent1;
 PShape horse2accent2;
 
-int moveGreen=0;
-int move
+
 
 void setupHorses() {
   noStroke();
