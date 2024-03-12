@@ -1,4 +1,4 @@
-/*import mqtt.*;
+import mqtt.*;
 MQTTClient client;
 
 void setupMQTT() {
@@ -26,4 +26,3 @@ void messageReceived(String topic, byte[] payload) {
 void connectionLost() {
   println("connection lost");
 }
-*/

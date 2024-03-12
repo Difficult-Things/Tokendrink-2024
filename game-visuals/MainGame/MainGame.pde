@@ -1,4 +1,4 @@
-//JSONObject gameState;
+JSONObject gameState;
 
 
 
@@ -7,22 +7,22 @@
 void setup() {
   //fullScreen();
   size(1920, 1080);
- // gameState = parseJSONObject("{\"round\":4,\"state\":\"play\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
+  gameState = parseJSONObject("{\"round\":4,\"state\":\"play\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
   setupHorses();
   setupGrijper();
   setupSlots();
   //Comment line below if testing without MQTT
- // setupMQTT();
+  setupMQTT();
   delay(100);
 }
 
 void draw() {
- // int round = gameState.getInt("round");
-  //String state = gameState.getString("state");
+  int round = gameState.getInt("round");
+  String state = gameState.getString("state");
   
-  int round = 5;
-  String state = "play";
-  //JSONObject ranking = gameState.getJSONObject("ranking");
+  //int round = 5;
+  //String state = "play";
+  JSONObject ranking = gameState.getJSONObject("ranking");
 
 
 
@@ -33,13 +33,13 @@ void draw() {
     switch(state) {
     case "drinking":
       resetSlotValues();
-     // drawSlots(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      drawSlots(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     case "reveal":
-      //drawSlots(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      drawSlots(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     case "play":
-      //drawSlots(true, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      drawSlots(true, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     }
     break;
@@ -48,13 +48,13 @@ void draw() {
     switch(state) {
     case "drinking":
       resetGrijperValues();
-      //drawGrijper(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      drawGrijper(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     case "reveal":
-      //drawGrijper(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      drawGrijper(false, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     case "play":
-      //drawGrijper(true, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      drawGrijper(true, ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
       break;
     }
     break;
@@ -68,8 +68,8 @@ void draw() {
       idlePhaseHorses();
       break;
     case "play":
-      //drawHorses(ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
-      drawHorses(1,2,3,4,5);
+      drawHorses(ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      //drawHorses(1,2,3,4,5);
       break;
     }
     break;
