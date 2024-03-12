@@ -17,18 +17,19 @@ boolean wentDown = false;
 boolean xReached = false;
 String[] images = {"Bal Groen.png", "Bal Paars.png", "Bal Oranje.png", "Bal Blauw.png", "Bal Rood.png"};
 String winner = "... Wins!";
+int countdownGrijper = 20;
 
-
-void resetGrijperValues(){
-        grabberMatrixX = -304/2;
-      grabberMatrixY = -1400;
-      grabberX = 0;
-      grabberY = 0;
-      grabberYMax = 1200;
-      currentTry = 0;
-      gravity = 10;
-      wentDown = false;
-      xReached = false;
+void resetGrijperValues() {
+  grabberMatrixX = -304/2;
+  grabberMatrixY = -1400;
+  grabberX = 0;
+  grabberY = 0;
+  grabberYMax = 1200;
+  currentTry = 0;
+  gravity = 10;
+  wentDown = false;
+  xReached = false;
+  countdownGrijper = 20;
 }
 
 void setupGrijper() {
@@ -36,7 +37,7 @@ void setupGrijper() {
   forgroundImg = loadImage("GrijperForground.png");
   grabber = loadImage("Grabber.png");
   dave = loadImage("Dave.png");
-  for (int i = 0; i < numberOfTries; i++){
+  for (int i = 0; i < numberOfTries; i++) {
     randomMoveX[i] = int(random(500, width-500));
     fallLimit[i] = int(random(200, height-600));
   }
@@ -44,36 +45,48 @@ void setupGrijper() {
 
 void drawGrijper(boolean start, int green, int purple, int orange, int blue, int red) {
   int winnerInput = 0;
-  if(green == 1){
+  if (green == 1) {
     winnerInput = 0;
-  }
-    else if(purple == 1){
+  } else if (purple == 1) {
     winnerInput = 1;
-  }
-    else if(orange == 1){
+  } else if (orange == 1) {
     winnerInput = 2;
-  }
-    else if(blue == 1){
+  } else if (blue == 1) {
     winnerInput = 3;
-  }
-    else if(red == 1){
+  } else if (red == 1) {
     winnerInput = 4;
   }
-  
-  if(start){
-      if (currentTry < numberOfTries) {
+  if (countdownGrijper >= 0) {
     backgroundImg();
-    grabber(winnerInput);
     forgroundImg();
-  } else {
-    winningScreen(winnerInput);
+    pushStyle();
+    textFont(Font1);
+    textAlign(CENTER);
+    fill(255, 0, 0);
+    if (countdownGrijper >= 0) {
+      text(countdownGrijper, width/2, height/2+180);
+    }
+    delay(1000);
+    popStyle();
+    countdownGrijper--;
   }
-  }
-  else{
-   backgroundImg();
-   forgroundImg();
+  if (countdownGrijper >= 0) {
+    return;
   }
 
+
+  if (start) {
+    if (currentTry < numberOfTries) {
+      backgroundImg();
+      grabber(winnerInput);
+      forgroundImg();
+    } else {
+      winningScreen(winnerInput);
+    }
+  } else {
+    backgroundImg();
+    forgroundImg();
+  }
 }
 
 void backgroundImg() {
@@ -110,8 +123,8 @@ void grabberMoveX(int winnerInput) {
 
 void ballColor(int winnerInput) {
   xReached = true;
-  if (currentTry < numberOfTries-1){
-    ball = loadImage(images[int(random(0,5))]);
+  if (currentTry < numberOfTries-1) {
+    ball = loadImage(images[int(random(0, 5))]);
   } else if (currentTry == numberOfTries-1) {
     ball = loadImage(images[winnerInput]);
   }
@@ -125,7 +138,7 @@ void grabberMoveY() {
     } else if (grabberY > 0) {
       wentDown = true;
       grabberY -= 5;
-    } else if (wentDown == true && grabberY <= 0){
+    } else if (wentDown == true && grabberY <= 0) {
       if (currentTry == numberOfTries - 1) {
         delay(1500);
       }
@@ -148,29 +161,4 @@ void ball() {
       image(ball, lastBallPosX, lastBallPosY);
     }
   }
-}
-
-void winningScreen(int winnerInput) {
-  background(255, 255, 255);
-  textSize(128);
-  fill(0);
-  switch(winnerInput) {
-    case 0: 
-      winner = "Green Wins!";
-      break;
-    case 1: 
-      winner = "Purple Wins!";
-      break;
-    case 2: 
-      winner = "Orange Wins!";
-      break;
-    case 3: 
-      winner = "Blue Wins!";
-      break;
-    case 4: 
-      winner = "Red Wins!";
-      break;
-  }
-  text(winner, 40, 800);
-  image(dave, 0, 0);
 }

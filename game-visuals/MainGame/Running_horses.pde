@@ -6,13 +6,13 @@ int xLastHorse = 0;
 
 
 int winningHorse(){
-  if ((millis()<(10000+startingTime))&&(millis()>(6000+startingTime))){
+  if ((millis()<(4000+startingTime))&&(millis()>(startingTime))){
     xWinnerHorse = xWinnerHorse + 1;
   }
   if ((millis()<(14000+startingTime))&&(millis()>(10000+startingTime))){
     xWinnerHorse = xWinnerHorse + 2;
   }
-  if ((millis()<(21000+startingTime))&&(millis()>(14000+startingTime))){
+  if ((millis()<(15000+startingTime))&&(millis()>(8000+startingTime))){
   xWinnerHorse = xWinnerHorse +0;
   }
   if ((millis()<(28000+startingTime))&&(millis()>(21000+startingTime))){
@@ -27,7 +27,7 @@ int winningHorse(){
   if ((millis()<(40000+startingTime))&&(millis()>(35000+startingTime))){
     xWinnerHorse = xWinnerHorse - 2;
   }
-  if ((millis()<(42000+startingTime))&&(millis()>(40000+startingTime))){
+  if ((millis()<(36000+startingTime))&&(millis()>(34000+startingTime))){
     xWinnerHorse = xWinnerHorse -1;
   }
   if ((millis()<(48000+startingTime))&&(millis()>(42000+startingTime))){
@@ -62,10 +62,10 @@ int secondHorse(){
   if ((millis()<(35000+startingTime))&&(millis()>(29000+startingTime))){
     xSecondHorse = xSecondHorse +2;
   }
-  if ((millis()<(45000+startingTime))&&(millis()>(35000+startingTime))){
+  if ((millis()<(39000+startingTime))&&(millis()>(29000+startingTime))){
     xSecondHorse = xSecondHorse -2;
   }
-  if ((millis()<(53000+startingTime))&&(millis()>(45000+startingTime))){
+  if ((millis()<(47000+startingTime))&&(millis()>(39000+startingTime))){
     xSecondHorse = xSecondHorse +0;
   }
   if ((millis()<(65000+startingTime))&&(millis()>(53000+startingTime))){
@@ -82,7 +82,13 @@ int thirdHorse(){
   if ((millis()<(13000+startingTime))&&(millis()>(8000+startingTime))){
     xThirdHorse = xThirdHorse + 1;
   }
-  if ((millis()<(20000+startingTime))&&(millis()>(13000+startingTime))){
+  if ((millis()<(14000+startingTime))&&(millis()>(7000+startingTime))){
+    xThirdHorse = xThirdHorse + 1;
+  }
+  if ((millis()<(18000+startingTime))&&(millis()>(14000+startingTime))){
+    xThirdHorse = xThirdHorse +0;
+  }
+  if ((millis()<(20000+startingTime))&&(millis()>(18000+startingTime))){
     xThirdHorse = xThirdHorse + 1;
   }
   if ((millis()<(24000+startingTime))&&(millis()>(20000+startingTime))){
@@ -94,22 +100,22 @@ int thirdHorse(){
   if ((millis()<(30000+startingTime))&&(millis()>(26000+startingTime))){
     xThirdHorse = xThirdHorse -3;
   }
-  if ((millis()<(34000+startingTime))&&(millis()>(30000+startingTime))){
+  if ((millis()<(28000+startingTime))&&(millis()>(24000+startingTime))){
     xThirdHorse = xThirdHorse + 1;
   }
-  if ((millis()<(38000+startingTime))&&(millis()>(34000+startingTime))){
+  if ((millis()<(32000+startingTime))&&(millis()>(28000+startingTime))){
     xThirdHorse = xThirdHorse + 0;
   }
-  if ((millis()<(43000+startingTime))&&(millis()>(38000+startingTime))){
+  if ((millis()<(37000+startingTime))&&(millis()>(32000+startingTime))){
     xThirdHorse = xThirdHorse + -1;
   }
   if ((millis()<(51000+startingTime))&&(millis()>(43000+startingTime))){
     xThirdHorse = xThirdHorse + 1;
   }
-  if ((millis()<(55000+startingTime))&&(millis()>(51000+startingTime))){
+  if ((millis()<(49000+startingTime))&&(millis()>(45000+startingTime))){
     xThirdHorse = xThirdHorse -2;
   }
-  if ((millis()<(60000+startingTime))&&(millis()>(55000+startingTime))){
+  if ((millis()<(54000+startingTime))&&(millis()>(49000+startingTime))){
     xThirdHorse = xThirdHorse -1;
   }
   if ((millis()<(66000+startingTime))&&(millis()>(60000+startingTime))){      // "dies at 60-6 sec
@@ -125,13 +131,13 @@ int fourthHorse(){
   if ((millis()<(9000+startingTime))&&(millis()>(6000+startingTime))){
     xFourthHorse = xFourthHorse + 3;
   }
-  if ((millis()<(11000+startingTime))&&(millis()>(9000+startingTime))){
+  if ((millis()<(5000+startingTime))&&(millis()>(3000+startingTime))){
     xFourthHorse = xFourthHorse + 1;
   }
   if ((millis()<(18000+startingTime))&&(millis()>(11000+startingTime))){
     xFourthHorse = xFourthHorse - 2;
   }
-  if ((millis()<(24000+startingTime))&&(millis()>(18000+startingTime))){
+  if ((millis()<(18000+startingTime))&&(millis()>(12000+startingTime))){
     xFourthHorse = xFourthHorse -1;
   }
   if ((millis()<(28000+startingTime))&&(millis()>(24000+startingTime))){
@@ -162,19 +168,19 @@ int lastHorse(){
   if ((millis()<(7000+startingTime))&&(millis()>(6000+startingTime))){
     xLastHorse = xLastHorse -2;
   }
-  if ((millis()<(9000+startingTime))&&(millis()>(7000+startingTime))){
+  if ((millis()<(3000+startingTime))&&(millis()>(1000+startingTime))){
     xLastHorse = xLastHorse +1;
   }
-  if ((millis()<(13000+startingTime))&&(millis()>(9000+startingTime))){
+  if ((millis()<(7000+startingTime))&&(millis()>(3000+startingTime))){
     xLastHorse = xLastHorse +2;
   }
-  if ((millis()<(18000+startingTime))&&(millis()>(13000+startingTime))){
+  if ((millis()<(12000+startingTime))&&(millis()>(7000+startingTime))){
     xLastHorse = xLastHorse +1;
   }
   if ((millis()<(22000+startingTime))&&(millis()>(18000+startingTime))){
     xLastHorse = xLastHorse -3;
   }
-  if ((millis()<(24000+startingTime))&&(millis()>(22000+startingTime))){
+  if ((millis()<(18000+startingTime))&&(millis()>(16000+startingTime))){
     xLastHorse = xLastHorse -2;
   }
   if ((millis()<(29000+startingTime))&&(millis()>(24000+startingTime))){

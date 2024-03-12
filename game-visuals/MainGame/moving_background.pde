@@ -50,20 +50,20 @@ void movingBackground(){
   image(background_fence, xFence-20, 250, 6000, 100);
   
   
-  textAlign(CENTER);
-  if ((millis()>(3000+startingTime))&& (millis()<(4000+startingTime))){
-    fill(255);
-    textSize(500);
-    text("3", width/2, height/2);
-  }
-    if ((millis()>(4000+startingTime))&& (millis()<(5000+startingTime))){
-    fill(255);
-    textSize(500);
-    text("2", width/2, height/2);
-  }
-    if ((millis()>(5000+startingTime))&& (millis()<(6000+startingTime))){
-    fill(255);
-    textSize(500);
-    text("1", width/2, height/2);
-  }
+  //textAlign(CENTER);
+  //if ((millis()>(3000+startingTime))&& (millis()<(4000+startingTime))){
+  //  fill(255);
+  //  textSize(500);
+  //  text("3", width/2, height/2);
+  //}
+  //  if ((millis()>(4000+startingTime))&& (millis()<(5000+startingTime))){
+  //  fill(255);
+  //  textSize(500);
+  //  text("2", width/2, height/2);
+  //}
+  //  if ((millis()>(5000+startingTime))&& (millis()<(6000+startingTime))){
+  //  fill(255);
+  //  textSize(500);
+  //  text("1", width/2, height/2);
+  //}
 }
