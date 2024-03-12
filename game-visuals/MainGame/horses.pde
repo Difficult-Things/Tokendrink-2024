@@ -20,9 +20,11 @@ void baseHorse(int xSpot, int ySpot,color accent1, color accent2, int move){
     startingFrames=frameCount;
   }
    
-  if((frameCount-startingFrames == a+10)&& move==1){
-    lastHorseFrame=1;
+  if((frameCount-startingFrames == a+10)&&millis()>6000+startingTime){
     a = frameCount-startingFrames;
+    if(move==1){
+      lastHorseFrame=1; 
+    }
   }
   if((lastHorseFrame==1)||(move==0)){
     horse1accent1.disableStyle();
@@ -37,11 +39,15 @@ void baseHorse(int xSpot, int ySpot,color accent1, color accent2, int move){
     
     
   }
-  if((frameCount-startingFrames == b+10)&&move ==1){
-    lastHorseFrame=2;
+  
+  if((frameCount-startingFrames == b+10)&&millis()>6000+startingTime){
     b = frameCount-startingFrames;
+    if(move==1){
+      lastHorseFrame=2;
+    }
   } 
-  if(lastHorseFrame==2){
+  
+  if(lastHorseFrame==2&&move==1){
     horse2accent1.disableStyle();
     horse2accent2.disableStyle();
     
