@@ -32,7 +32,7 @@ void movingBackground(){
     }
     
     //Fence
-    if (xFence>(-4000+7+width)){
+    if (xFence>(-6000+7+width)){
       xFence=xFence-4;
     }
   } 
@@ -47,7 +47,7 @@ void movingBackground(){
 
   image(background_clouds, xClouds, 60, 4000, 125);
   image(background_mountains, xMountains,50, 4000, 300);
-  image(background_fence, xFence-7, 200, 4000, 150);
+  image(background_fence, xFence-20, 250, 6000, 100);
   
   
   textAlign(CENTER);

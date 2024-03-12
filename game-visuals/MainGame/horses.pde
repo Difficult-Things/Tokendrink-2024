@@ -13,20 +13,29 @@ int purple;
 int red;
 int blue;
 int orange;
+void baseHorseStill(int xSpot, int ySpot,color accent1, color accent2){
+    horse1accent1.disableStyle();
+    horse1accent2.disableStyle();
+    
+    shape(horse1, xSpot-50,ySpot-350, 500,400);  
+    
+    fill(accent1);
+    shape(horse1accent1,xSpot-50,ySpot-350,500,400);
+    fill(accent2);
+    shape(horse1accent2,xSpot-50,ySpot-350,500,400);
+}
 
-void baseHorse(int xSpot, int ySpot,color accent1, color accent2, int move){
+void baseHorseMoving(int xSpot, int ySpot,color accent1, color accent2){
   noStroke();
   if (millis()>6000+startingTime&& millis()<6100+startingTime){
     startingFrames=frameCount;
   }
    
-  if((frameCount-startingFrames == a+10)&&millis()>6000+startingTime){
+  if(frameCount-startingFrames == a+10){
     a = frameCount-startingFrames;
-    if(move==1){
-      lastHorseFrame=1; 
-    }
+    lastHorseFrame=1; 
   }
-  if((lastHorseFrame==1)||(move==0)){
+  if(lastHorseFrame==1){
     horse1accent1.disableStyle();
     horse1accent2.disableStyle();
     
@@ -42,12 +51,10 @@ void baseHorse(int xSpot, int ySpot,color accent1, color accent2, int move){
   
   if((frameCount-startingFrames == b+10)&&millis()>6000+startingTime){
     b = frameCount-startingFrames;
-    if(move==1){
-      lastHorseFrame=2;
-    }
+    lastHorseFrame=2;
   } 
   
-  if(lastHorseFrame==2&&move==1){
+  if(lastHorseFrame==2){
     horse2accent1.disableStyle();
     horse2accent2.disableStyle();
     
@@ -74,11 +81,15 @@ void horseGreen(int xGreen){
    moveGreen=moveLast(); 
   }
   
-  baseHorse(260+xGreen, 375,#009040,#0CA54F,moveGreen);
-
+  if(moveGreen==0){
+    baseHorseStill(260+xGreen, 375,#009040,#0CA54F);
+  }
+  if(moveGreen==1){
+    baseHorseMoving(260+xGreen, 375,#009040,#0CA54F);
+  }
 }
 void horsePurple(int xPurple){
-   if(getPosition(purple)==winningHorse()){
+  if(getPosition(purple)==winningHorse()){
     movePurple=moveWinner();
   }else if (getPosition(purple)==secondHorse()){
     movePurple=moveSecond(); 
@@ -89,9 +100,12 @@ void horsePurple(int xPurple){
   }else if(getPosition(purple)==lastHorse()){
    movePurple=moveLast(); 
   }
-  
-  baseHorse(220+ xPurple, 525,#5a12b0, #4D1593,movePurple);
- 
+  if(movePurple==0){
+    baseHorseStill(220+ xPurple, 525,#5a12b0, #4D1593);
+  }
+  if(movePurple==1){
+    baseHorseMoving(220+ xPurple, 525,#5a12b0, #4D1593);
+  }
 }
 void horseBlue(int xBlue){
   if(getPosition(blue)==winningHorse()){
@@ -106,9 +120,13 @@ void horseBlue(int xBlue){
    moveBlue=moveLast(); 
   }
   
+  if(moveBlue==0){
+  baseHorseStill(180+xBlue,675,#0857c3, #0B438E);
+  }
   
-  baseHorse(180+xBlue,675,#0857c3, #0B438E,moveBlue);
-
+ if(moveBlue==1){
+   baseHorseMoving(180+xBlue,675,#0857c3, #0B438E);
+ }
 }
 void horseRed(int xRed){
    if(getPosition(red)==winningHorse()){
@@ -122,8 +140,12 @@ void horseRed(int xRed){
   }else if(getPosition(red)==lastHorse()){
    moveRed=moveLast(); 
   }
-  
-  baseHorse(140+xRed, 825,#ba0c2f, #900624,moveRed);
+  if (moveRed==0){
+    baseHorseStill(140+xRed, 825,#ba0c2f, #900624);
+  }
+  if(moveRed==1){
+     baseHorseMoving(140+xRed, 825,#ba0c2f, #900624);
+  }
   
 }
 void horseOrange(int xOrange){
@@ -138,7 +160,10 @@ void horseOrange(int xOrange){
   }else if(getPosition(orange)==lastHorse()){
    moveOrange=moveLast(); 
   }
-  
-  baseHorse(100+xOrange, 975, #ec681c, #D3510B,moveOrange);
-  
+  if (moveOrange==0){
+    baseHorseStill(100+xOrange, 975, #ec681c, #D3510B);
+  }
+  if (moveOrange==1){
+    baseHorseMoving(100+xOrange, 975, #ec681c, #D3510B);
+  }
 }

@@ -17,6 +17,6 @@ void startingBackground(){
   
   image(background_clouds, 0, 60, 4000, 125);
   image(background_mountains, 0,50, 4000, 300);
-  image(background_fence, -7, 200, 4000, 150);
+  image(background_fence, -20, 250, 6000, 100);
   
 }

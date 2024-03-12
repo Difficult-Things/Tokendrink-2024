@@ -5,50 +5,45 @@ int fourthValue=0;
 int lastValue=0;
 
 int moveWinner(){
-  if((millis()+startingTime>6000)&&(millis()+startingTime<66000)){
+  if((millis()+startingTime>6000)&&(millis()+startingTime<61000)){
    winnerValue=1; 
-  }
-  if (millis()+startingTime>66000){
+  }else{
     winnerValue=0; 
   }
   return winnerValue;
 }
 
 int moveSecond(){
-  if((millis()+startingTime>6000)&&(millis()+startingTime<66000)){
+  if((millis()+startingTime>6000)&&(millis()+startingTime<65000)){
    secondValue=1; 
-  }
-  if (millis()+startingTime>66000){
+  }else{
     secondValue=0; 
   }
   return secondValue;
 }
 
 int moveThird(){
-  if((millis()+startingTime>6000)&&(millis()+startingTime<86000)){
+  if((millis()+startingTime>6000)&&(millis()+startingTime<78000)){
    thirdValue=1; 
-  }
-  if (millis()+startingTime>86000){
+  }else{
     thirdValue=0; 
   }
   return thirdValue;
 }
 
 int moveFourth(){
-  if((millis()+startingTime>6000)&&(millis()+startingTime<102000)){
+  if((millis()+startingTime>6000)&&(millis()+startingTime<85000)){
     fourthValue=1; 
-  }
-  if (millis()+startingTime>102000){
+  }else{
     fourthValue=0; 
   }
   return fourthValue;
 }
 
 int moveLast(){
-  if((millis()+startingTime>6000)&&(millis()+startingTime<144000)){
+  if((millis()+startingTime>6000)&&(millis()+startingTime<93000)){
     lastValue=1; 
-  }
-  if (millis()+startingTime>144000){
+  }else{
     lastValue=0; 
   }
   return lastValue;
