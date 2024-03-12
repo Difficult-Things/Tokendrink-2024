@@ -5,17 +5,33 @@ import { TabsTrigger } from "@radix-ui/react-tabs";
 import * as Select from "@radix-ui/react-select";
 import * as AlertDialog from "@radix-ui/react-alert-dialog";
 import "./alertStyling.css";
+import Nestable from "react-nestable";
+import "react-nestable/dist/styles/index.css"; //Werd aangeraden om hier te doen, idk waarom
 
 export function Control(props: any) {
   const [round, setRound] = React.useState("1");
   const [roundState, setRoundState] = React.useState("drinking");
+  const [ranking, setRanking] = React.useState([
+    { id: 0, text: "Red" },
+    { id: 1, text: "Green" },
+    { id: 2, text: "Blue" },
+    { id: 3, text: "Purple" },
+    { id: 4, text: "Orange" },
+  ]);
+
+  const renderItem = ({ item }: any) => item.text;
+
+  const doSomethingWithChange = (items: any) => {
+    setRanking(items.items);
+    return true;
+  };
 
   return (
     <div className="flex flex-col m-4 gap-4">
       <h2 className="text-lg font-bold">CONTROLS</h2>
 
       <div className="flex flex-col items-center">
-        <Tabs defaultValue="1">
+        {/* <Tabs defaultValue="1">
           <TabsList>
             <TabsTrigger value="1">1</TabsTrigger>
             <TabsTrigger value="2">2</TabsTrigger>
@@ -23,7 +39,11 @@ export function Control(props: any) {
             <TabsTrigger value="4">4</TabsTrigger>
             <TabsTrigger value="5">5</TabsTrigger>
           </TabsList>
-        </Tabs>
+        </Tabs> */}
+        <div className="m-5">
+          <Nestable maxDepth={1} onChange={doSomethingWithChange} items={ranking} renderItem={renderItem} />
+        </div>
+
         <div className="flex row">
           <div className="m-5">
             <Select.Root value={round} onValueChange={setRound}>
@@ -105,13 +125,21 @@ export function Control(props: any) {
                   <button
                     className="Button red"
                     onClick={() => {
-                      props.client.publish("gamevisuals/gamestate", JSON.stringify({round: parseInt(round), state: roundState, ranking: {
-                        red: 1,
-                        green: 2,
-                        orange: 3,
-                        blue: 4,
-                        purple: 5
-                      }}));
+                      console.log(ranking);
+                      props.client.publish(
+                        "gamevisuals/gamestate",
+                        JSON.stringify({
+                          round: parseInt(round),
+                          state: roundState,
+                          ranking: {
+                            red: ranking.findIndex(item => item.text === "Red") + 1,
+                            green: ranking.findIndex(item => item.text === "Green") + 1,
+                            orange: ranking.findIndex(item => item.text === "Orange") + 1,
+                            blue: ranking.findIndex(item => item.text === "Blue") + 1,
+                            purple:  ranking.findIndex(item => item.text === "Purple") + 1,
+                          },
+                        })
+                      );
                     }}
                   >
                     Yes, update game state

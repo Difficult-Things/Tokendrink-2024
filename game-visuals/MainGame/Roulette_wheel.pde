@@ -273,6 +273,7 @@ void drawRoulette(boolean start, boolean reveal, int green, int purple, int oran
 
     pushStyle();
     textFont(Font1);
+    fill(255,0,0);
     textAlign(CENTER);
     if (countdownRoulette >= 0) {
       text(countdownRoulette, width/2, height/2+180);

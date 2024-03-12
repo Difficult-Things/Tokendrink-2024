@@ -151,6 +151,8 @@ void draw() {
 }
 
 void winningScreen(int winnerInput) {
+  textAlign(LEFT,UP);
+    imageMode(CORNER);
   background(255, 255, 255);
   textSize(128);
   fill(0);
