@@ -13,6 +13,9 @@ PShape horse2;
 PShape horse2accent1;
 PShape horse2accent2;
 
+int moveGreen=0;
+int move
+
 void setupHorses() {
   noStroke();
   background(0);
@@ -46,6 +49,7 @@ void resetHorseValues(){
       xClouds = 0;
       xStart = 0;
       xFinish = 1700;
+     
 }
 
 void drawHorses(int green, int purple, int orange, int blue, int red) {
@@ -58,13 +62,16 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
     startingBackground();
   }
   if (horseStart == 1) {
+   
     movingBackground();
-
+    
+    
+    
     horseGreen(getPosition(green));
     horsePurple(getPosition(purple));
-    horseOrange(getPosition(orange));
     horseBlue(getPosition(blue));
     horseRed(getPosition(red));
+    horseOrange(getPosition(orange));
   }
 }
 

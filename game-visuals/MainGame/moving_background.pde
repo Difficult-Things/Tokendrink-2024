@@ -1,5 +1,5 @@
 //Start values
-int xMountains = 0;
+float xMountains = 0;
 int xFence = 0;
 int xClouds = 0;
 int xStart = 0;
@@ -15,10 +15,10 @@ void movingBackground(){
   
 
   if ((millis()<(65000+startingTime))&&(millis()>(6000+startingTime))){  
-     if( xStart > -435){
+     if( xStart > -750){
        xStart = xStart - 4;
      }
-     if (millis()>(53000+startingTime)&&(xStart<-430)){
+     if (millis()>(33000+startingTime)&&(xStart<-700)){
        xStart = xFinish;
      }
     //clouds
@@ -28,7 +28,7 @@ void movingBackground(){
     
     //mountains
     if (xMountains>(-4000+width)){
-      xMountains=xMountains-2;
+      xMountains=xMountains-1.5;
     }
     
     //Fence
@@ -39,10 +39,10 @@ void movingBackground(){
   //startline
   stroke(0);
   strokeWeight(25);
-  line(xStart+400, 350, xStart+240, height);
+  line(xStart+700, 350, xStart+540, height);
   
   strokeWeight(10);
-  line(xStart+425,350,xStart+265,height);
+  line(xStart+725,350,xStart+565,height);
   noStroke();
 
   image(background_clouds, xClouds, 60, 4000, 125);
