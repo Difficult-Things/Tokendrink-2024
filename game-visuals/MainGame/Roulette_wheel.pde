@@ -91,7 +91,7 @@ int[][] numbers2 = {
 };
 
 //positions of the chips placed
-int[][] positions = new int[][]{{20, 10, 30, 21, 9, 13, 14, 6, 7, 34}, {5, 24, 1, 2, 12, 16, 31, 17, 23}, {28, 32, 3, 8, 34, 0, 19}, {29, 22, 33, 11, 18, 15}, {35, 25, 26, 27, 4}};
+int[][] positions = new int[][]{{20, 10, 30, 21, 9, 2, 14, 6, 7, 34}, {5, 24, 1, 13, 12, 16, 31, 17, 23}, {28, 32, 3, 8, 34, 0, 19}, {29, 22, 33, 11, 18, 15}, {35, 25, 26, 27, 4}};
 
 void resetRouletteValues() {
   wheelAngle = 0; // Initial angle of the wheel
