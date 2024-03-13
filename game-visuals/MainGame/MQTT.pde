@@ -10,7 +10,7 @@ void setupMQTT() {
 
 void clientConnected() {
   println("client connected");
-  client.publish(statusTopic, "ONLINE");
+  client.publish(statusTopic, "ONLINE", 2, true);
 
   client.subscribe(gameStateTopic, 2);
 }

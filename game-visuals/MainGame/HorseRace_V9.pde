@@ -5,6 +5,7 @@ int horseStart = 0;
 int startingTime;
 PFont WinningFont;
 int countdownPaard = 20;
+boolean messageWinnerSent = false;
 void setupHorses() {
   noStroke();
   background(0);
@@ -35,7 +36,7 @@ void resetHorseValues() {
 }
 
 void drawHorses(int green, int purple, int orange, int blue, int red) {
-  
+
   if (countdownPaard >= 0) {
     startingBackground();
     pushStyle();
@@ -52,7 +53,7 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
   if (countdownPaard >= 0) {
     return;
   }
-  
+
   if ((horseStart == 0)) {
     horseStart =1;
     startingTime = millis();
@@ -73,18 +74,40 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
     pushStyle();
     String winningText = "";
     if (green == 1) {
+      if (!messageWinnerSent) {
+        messageWinnerSent = true;
+        client.publish("finalWinner", "0", 2, false);
+      }
+
       fill(#009040);
       winningText = "Team GREEN has won\r\n this year's tokendrink!";
     } else if (orange == 1) {
+      if (!messageWinnerSent) {
+        messageWinnerSent = true;
+        client.publish("finalWinner", "2");
+      }
+
       fill(#EC681C);
       winningText = "Team ORANGE has won\r\n this year's tokendrink!";
     } else if (purple == 1) {
+      if (!messageWinnerSent) {
+        messageWinnerSent = true;
+        client.publish("finalWinner", "1");
+      }
       fill(#7724DE);
       winningText = "Team PURPLE has won\r\n this year's tokendrink!";
     } else if (blue == 1) {
+      if (!messageWinnerSent) {
+        messageWinnerSent = true;
+        client.publish("finalWinner", "3");
+      }
       fill(#3280EA);
       winningText = "Team BLUE has won\r\n this year's tokendrink!";
     } else if (red == 1) {
+      if (!messageWinnerSent) {
+        messageWinnerSent = true;
+        client.publish("finalWinner", "4");
+      }
       fill(#BA0C2F);
       winningText = "Team RED has won\r\n this year's tokendrink!";
     }
