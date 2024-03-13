@@ -2,6 +2,7 @@ import chokidar from "chokidar";
 
 import fs from "fs";
 import path from "path";
+import mqtt from "mqtt";
 
 import { PdfDocument } from "@ironsoftware/ironpdf";
 import { Session } from "./util/session";
@@ -9,6 +10,30 @@ import { Session } from "./util/session";
 var argv = require("minimist")(process.argv.slice(2));
 
 const session = new Session();
+
+// MQTT
+const client = mqtt.connect("mqtt://localhost:1883");
+client.on("connect", function () {
+  console.log("Connected to MQTT server");
+  client.publish("data-watcher/status", "ONLINE");
+});
+
+client.on("error", function (error) {
+  console.error("MQTT error: ", error);
+});
+
+client.on("offline", function () {
+  console.error("MQTT offline");
+});
+
+client.on("reconnect", function () {
+  console.error("MQTT reconnect");
+  client.connect();
+});
+
+client.on("close", function () {
+  console.error("MQTT close");
+});
 
 // Path to watch
 const DEFAULT_PATH = path.join(process.cwd(), "tokendrink-pubcard-data");
@@ -55,6 +80,10 @@ watcher.on("add", async (path) => {
 
     session.processPDF(text);
     session.showData();
+
+    const data = JSON.stringify(session.getData());
+    console.log(data);
+    client.publish("data-watcher/data", data);
 
   } catch (err) {
     console.error(err);
