@@ -10,9 +10,10 @@ export default function Home() {
   const [client, setClient] = React.useState<any>(null);
   const [pullenwandConnected, setPullenwandConnected] = React.useState("OFFLINE");
   const [maingameConnected, setMaingameConnected] = React.useState("OFFLINE");
+  const [dataWatcherConnected, setDataWatcherConnected] = React.useState("OFFLINE");
+
+  const [data, setData] = React.useState<any>(null);
  
-
-
   useEffect(() => {
     if (client) {
       console.log(client);
@@ -20,6 +21,7 @@ export default function Home() {
         console.log("Connected");
         client.subscribe("gamevisuals/status");
         client.subscribe("pullenwand/status");
+        client.subscribe("data-watcher/#");
       });
       client.on("error", (err: any) => {
         console.error("Connection error: ", err);
@@ -32,6 +34,13 @@ export default function Home() {
         }
         if (topic === "pullenwand/status") {
           setPullenwandConnected(message.toString());
+        }
+        if (topic === "data-watcher/status") {
+          setDataWatcherConnected(message.toString());
+        }
+        if (topic === "data-watcher/data") {
+          const json = JSON.parse(message.toString());
+          setData(json);
         }
       });
     }
@@ -53,7 +62,7 @@ export default function Home() {
             <Control client={client} />
           </div>
           <div className="flex-grow flex-shrink basis-0 mx-4 rounded-lg border">
-            <Stats />
+            <Stats data={data} />
           </div>
         </div>
       </div>
@@ -61,6 +70,7 @@ export default function Home() {
       <div className="flex-grow-0 flex-shrink basis-[40px] text-center">
         <p>Maingame is {maingameConnected}</p>
         <p>Pullenwand is {pullenwandConnected}</p>
+        <p>DataWatcher is {dataWatcherConnected}</p>
 
         <Footer />
       </div>

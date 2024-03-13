@@ -1,0 +1,1092 @@
+{
+  "groups": [
+    {
+      "id": "fridge",
+      "strips": [
+        "fridge-left",
+        "fridge-right"
+      ]
+    },
+    {
+      "id": "shelves-left",
+      "strips": [
+        "shelves-left-top",
+        "shelves-left-bottom"
+      ]
+    },
+    {
+      "id": "shelves-right",
+      "strips": [
+        "shelves-right-top",
+        "shelves-right-bottom"
+      ]
+    },
+    {
+      "id": "beer-mug",
+      "strips": [
+        "beer-mug-0-1",
+        "beer-mug-0-2",
+        "beer-mug-1-1",
+        "beer-mug-1-2",
+        "beer-mug-2-1",
+        "beer-mug-2-2",
+        "beer-mug-3-1",
+        "beer-mug-3-2",
+        "beer-mug-4-1",
+        "beer-mug-4-2",
+        "beer-mug-5-1",
+        "beer-mug-5-2",
+        "beer-mug-6-1",
+        "beer-mug-6-2",
+        "beer-mug-7-1",
+        "beer-mug-7-2",
+        "beer-mug-8-1",
+        "beer-mug-8-2",
+        "beer-mug-9-1",
+        "beer-mug-9-2",
+        "beer-mug-10-1",
+        "beer-mug-10-2",
+        "beer-mug-11-1",
+        "beer-mug-11-2",
+        "beer-mug-12-1",
+        "beer-mug-12-2",
+        "beer-mug-13-1",
+        "beer-mug-13-2"
+      ]
+    },
+    {
+      "id": "bar-front",
+      "strips": [
+        "bar-front-0",
+        "bar-front-1",
+        "bar-front-2",
+        "bar-front-3",
+        "bar-front-4",
+        "bar-front-5",
+        "bar-front-6",
+        "bar-front-7",
+        "bar-front-8",
+        "bar-front-9",
+        "bar-front-10",
+        "bar-front-11",
+        "bar-front-12",
+        "bar-front-13",
+        "bar-front-14",
+        "bar-front-15",
+        "bar-front-16",
+        "bar-front-17",
+        "bar-front-18",
+        "bar-front-19",
+        "bar-front-20",
+        "bar-front-21",
+        "bar-front-22",
+        "bar-front-23",
+        "bar-front-24",
+        "bar-front-25",
+        "bar-front-26",
+        "bar-front-27",
+        "bar-front-28",
+        "bar-front-29",
+        "bar-front-30",
+        "bar-front-31",
+        "bar-front-32",
+        "bar-front-33",
+        "bar-front-34",
+        "bar-front-35",
+        "bar-front-36",
+        "bar-front-37",
+        "bar-front-38",
+        "bar-front-39",
+        "bar-front-40",
+        "bar-front-41",
+        "bar-front-42",
+        "bar-front-43",
+        "bar-front-44",
+        "bar-front-45",
+        "bar-front-46",
+        "bar-front-47"
+      ]
+    }
+  ],
+  "controllers": [
+    {
+      "id": "bar-back-controller",
+      "ip": "10.0.0.2",
+      "subnet": 0,
+      "strips": [
+        {
+          "id": "fridge-left",
+          "universe": 18,
+          "count": 71,
+          "coordinates": [
+            20,
+            40,
+            20,
+            240
+          ],
+          "offset": 71
+        },
+        {
+          "id": "fridge-right",
+          "universe": 18,
+          "count": 71,
+          "coordinates": [
+            40,
+            40,
+            40,
+            240
+          ]
+        },
+        {
+          "id": "shelves-left-top",
+          "universe": 14,
+          "count": 86,
+          "coordinates": [
+            275,
+            40,
+            70,
+            40
+          ]
+        },
+        {
+          "id": "shelves-left-bottom",
+          "universe": 15,
+          "count": 86,
+          "coordinates": [
+            275,
+            60,
+            70,
+            60
+          ]
+        },
+        {
+          "id": "shelves-right-top",
+          "universe": 16,
+          "count": 120,
+          "coordinates": [
+            70,
+            100,
+            375,
+            100
+          ]
+        },
+        {
+          "id": "shelves-right-bottom",
+          "universe": 17,
+          "count": 120,
+          "coordinates": [
+            70,
+            120,
+            375,
+            120
+          ]
+        },
+        {
+          "id": "beer-mug-0-1",
+          "universe": 0,
+          "coordinates": [
+            400,
+            40,
+            620,
+            40
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-0-2",
+          "universe": 0,
+          "coordinates": [
+            620,
+            45,
+            400,
+            45
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-1-1",
+          "universe": 1,
+          "coordinates": [
+            400,
+            50,
+            620,
+            50
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-1-2",
+          "universe": 1,
+          "coordinates": [
+            620,
+            55,
+            400,
+            55
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-2-1",
+          "universe": 2,
+          "coordinates": [
+            400,
+            59,
+            620,
+            59
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-2-2",
+          "universe": 2,
+          "coordinates": [
+            620,
+            64,
+            400,
+            64
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-3-1",
+          "universe": 3,
+          "coordinates": [
+            400,
+            69,
+            620,
+            69
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-3-2",
+          "universe": 3,
+          "coordinates": [
+            620,
+            74,
+            400,
+            74
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-4-1",
+          "universe": 4,
+          "coordinates": [
+            400,
+            79,
+            620,
+            79
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-4-2",
+          "universe": 4,
+          "coordinates": [
+            620,
+            84,
+            400,
+            84
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-5-1",
+          "universe": 5,
+          "coordinates": [
+            400,
+            88,
+            620,
+            88
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-5-2",
+          "universe": 5,
+          "coordinates": [
+            620,
+            93,
+            400,
+            93
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-6-1",
+          "universe": 6,
+          "coordinates": [
+            400,
+            98,
+            620,
+            98
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-6-2",
+          "universe": 6,
+          "coordinates": [
+            620,
+            103,
+            400,
+            103
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-7-1",
+          "universe": 7,
+          "coordinates": [
+            400,
+            108,
+            620,
+            108
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-7-2",
+          "universe": 7,
+          "coordinates": [
+            620,
+            113,
+            400,
+            113
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-8-1",
+          "universe": 8,
+          "coordinates": [
+            400,
+            117,
+            620,
+            117
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-8-2",
+          "universe": 8,
+          "coordinates": [
+            620,
+            122,
+            400,
+            122
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-9-1",
+          "universe": 9,
+          "coordinates": [
+            400,
+            127,
+            620,
+            127
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-9-2",
+          "universe": 9,
+          "coordinates": [
+            620,
+            132,
+            400,
+            132
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-10-1",
+          "universe": 10,
+          "coordinates": [
+            400,
+            136,
+            620,
+            136
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-10-2",
+          "universe": 10,
+          "coordinates": [
+            620,
+            141,
+            400,
+            141
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-11-1",
+          "universe": 11,
+          "coordinates": [
+            400,
+            146,
+            620,
+            146
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-11-2",
+          "universe": 11,
+          "coordinates": [
+            620,
+            151,
+            400,
+            151
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-12-1",
+          "universe": 12,
+          "coordinates": [
+            400,
+            156,
+            620,
+            156
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-12-2",
+          "universe": 12,
+          "coordinates": [
+            620,
+            161,
+            400,
+            161
+          ],
+          "count": 41,
+          "offset": 41
+        },
+        {
+          "id": "beer-mug-13-1",
+          "universe": 13,
+          "coordinates": [
+            400,
+            165,
+            620,
+            165
+          ],
+          "count": 41
+        },
+        {
+          "id": "beer-mug-13-2",
+          "universe": 13,
+          "coordinates": [
+            620,
+            170,
+            400,
+            170
+          ],
+          "count": 41,
+          "offset": 41
+        }
+      ]
+    },
+    {
+      "id": "bar-front-controller",
+      "ip": "10.0.0.3",
+      "subnet": 0,
+      "strips": [
+        {
+          "id": "bar-front-0",
+          "universe": 18,
+          "count": 38,
+          "coordinates": [
+            870,
+            240,
+            870,
+            330
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-1",
+          "universe": 19,
+          "count": 62,
+          "coordinates": [
+            853,
+            200,
+            853,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-2",
+          "universe": 20,
+          "count": 9,
+          "coordinates": [
+            835,
+            330,
+            835,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-3",
+          "universe": 20,
+          "count": 17,
+          "coordinates": [
+            825,
+            200,
+            825,
+            240
+          ],
+          "offset": 9
+        },
+        {
+          "id": "bar-front-4",
+          "universe": 21,
+          "count": 62,
+          "coordinates": [
+            807,
+            200,
+            807,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-5",
+          "universe": 22,
+          "count": 38,
+          "coordinates": [
+            780,
+            240,
+            780,
+            330
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-6",
+          "universe": 23,
+          "count": 9,
+          "coordinates": [
+            772,
+            200,
+            772,
+            215
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-7",
+          "universe": 23,
+          "count": 17,
+          "coordinates": [
+            754,
+            315,
+            754,
+            345
+          ],
+          "offset": 17
+        },
+        {
+          "id": "bar-front-8",
+          "universe": 24,
+          "count": 62,
+          "coordinates": [
+            735,
+            200,
+            735,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-9",
+          "universe": 25,
+          "count": 9,
+          "coordinates": [
+            699,
+            330,
+            699,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-10",
+          "universe": 25,
+          "count": 38,
+          "coordinates": [
+            708,
+            220,
+            708,
+            310
+          ],
+          "offset": 9
+        },
+        {
+          "id": "bar-front-11",
+          "universe": 26,
+          "count": 32,
+          "coordinates": [
+            681,
+            200,
+            681,
+            235
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-12",
+          "universe": 26,
+          "count": 17,
+          "coordinates": [
+            672,
+            280,
+            672,
+            345
+          ],
+          "offset": 32
+        },
+        {
+          "id": "bar-front-13",
+          "universe": 27,
+          "count": 38,
+          "coordinates": [
+            644,
+            240,
+            644,
+            330
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-14",
+          "universe": 28,
+          "count": 62,
+          "coordinates": [
+            617,
+            200,
+            617,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-15",
+          "universe": 29,
+          "count": 9,
+          "coordinates": [
+            581,
+            200,
+            581,
+            215
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-16",
+          "universe": 29,
+          "count": 32,
+          "coordinates": [
+            599,
+            240,
+            599,
+            310
+          ],
+          "offset": 9
+        },
+        {
+          "id": "bar-front-17",
+          "universe": 30,
+          "count": 32,
+          "coordinates": [
+            572,
+            240,
+            572,
+            321
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-18",
+          "universe": 30,
+          "count": 9,
+          "coordinates": [
+            581,
+            330,
+            581,
+            345
+          ],
+          "offset": 32
+        },
+        {
+          "id": "bar-front-19",
+          "universe": 31,
+          "count": 62,
+          "coordinates": [
+            554,
+            200,
+            554,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-20",
+          "universe": 32,
+          "count": 38,
+          "coordinates": [
+            527,
+            220,
+            527,
+            310
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-21",
+          "universe": 33,
+          "count": 17,
+          "coordinates": [
+            491,
+            315,
+            491,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-22",
+          "universe": 33,
+          "count": 32,
+          "coordinates": [
+            500,
+            200,
+            500,
+            270
+          ],
+          "offset": 17
+        },
+        {
+          "id": "bar-front-23",
+          "universe": 34,
+          "count": 38,
+          "coordinates": [
+            463,
+            240,
+            463,
+            330
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-24",
+          "universe": 34,
+          "count": 9,
+          "coordinates": [
+            473,
+            200,
+            473,
+            215
+          ],
+          "offset": 38
+        },
+        {
+          "id": "bar-front-25",
+          "universe": 35,
+          "count": 62,
+          "coordinates": [
+            445,
+            200,
+            445,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-26",
+          "universe": 36,
+          "count": 9,
+          "coordinates": [
+            427,
+            330,
+            427,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-27",
+          "universe": 36,
+          "count": 17,
+          "coordinates": [
+            418,
+            200,
+            418,
+            235
+          ],
+          "offset": 9
+        },
+        {
+          "id": "bar-front-28",
+          "universe": 37,
+          "count": 62,
+          "coordinates": [
+            400,
+            200,
+            400,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-29",
+          "universe": 38,
+          "count": 38,
+          "coordinates": [
+            372,
+            240,
+            372,
+            330
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-30",
+          "universe": 38,
+          "count": 9,
+          "coordinates": [
+            363,
+            200,
+            363,
+            215
+          ],
+          "offset": 38
+        },
+        {
+          "id": "bar-front-31",
+          "universe": 39,
+          "count": 17,
+          "coordinates": [
+            345,
+            315,
+            345,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-32",
+          "universe": 39,
+          "count": 32,
+          "coordinates": [
+            336,
+            200,
+            336,
+            270
+          ],
+          "offset": 17
+        },
+        {
+          "id": "bar-front-33",
+          "universe": 40,
+          "count": 38,
+          "coordinates": [
+            309,
+            220,
+            309,
+            310
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-34",
+          "universe": 41,
+          "count": 62,
+          "coordinates": [
+            281,
+            200,
+            281,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-35",
+          "universe": 42,
+          "count": 9,
+          "coordinates": [
+            245,
+            335,
+            245,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-36",
+          "universe": 42,
+          "count": 32,
+          "coordinates": [
+            263,
+            240,
+            263,
+            310
+          ],
+          "offset": 9
+        },
+        {
+          "id": "bar-front-37",
+          "universe": 43,
+          "count": 32,
+          "coordinates": [
+            245,
+            200,
+            245,
+            215
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-38",
+          "universe": 43,
+          "count": 9,
+          "coordinates": [
+            236,
+            240,
+            236,
+            310
+          ],
+          "offset": 32
+        },
+        {
+          "id": "bar-front-39",
+          "universe": 44,
+          "count": 62,
+          "coordinates": [
+            218,
+            200,
+            218,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-40",
+          "universe": 45,
+          "count": 38,
+          "coordinates": [
+            190,
+            240,
+            190,
+            330
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-41",
+          "universe": 46,
+          "count": 32,
+          "coordinates": [
+            163,
+            275,
+            163,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-42",
+          "universe": 46,
+          "count": 17,
+          "coordinates": [
+            154,
+            200,
+            154,
+            235
+          ],
+          "offset": 32
+        },
+        {
+          "id": "bar-front-43",
+          "universe": 47,
+          "count": 9,
+          "coordinates": [
+            136,
+            330,
+            136,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-44",
+          "universe": 47,
+          "count": 38,
+          "coordinates": [
+            127,
+            220,
+            127,
+            310
+          ],
+          "offset": 9
+        },
+        {
+          "id": "bar-front-45",
+          "universe": 48,
+          "count": 62,
+          "coordinates": [
+            99,
+            200,
+            99,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-46",
+          "universe": 49,
+          "count": 17,
+          "coordinates": [
+            82,
+            310,
+            82,
+            345
+          ],
+          "offset": 0
+        },
+        {
+          "id": "bar-front-47",
+          "universe": 49,
+          "count": 32,
+          "coordinates": [
+            73,
+            200,
+            73,
+            270
+          ],
+          "offset": 17
+        }
+      ]
+    }
+  ]
+}
