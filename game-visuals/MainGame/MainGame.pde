@@ -153,7 +153,9 @@ void draw() {
 void winningScreen(int winnerInput) {
   textAlign(LEFT, UP);
   imageMode(CORNER);
-  background(255, 255, 255);
+    image(backgroundSlots, 0, 0);
+
+  //background(255, 255, 255);
   textSize(128);
   fill(0);
   switch(winnerInput) {
