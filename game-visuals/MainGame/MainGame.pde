@@ -11,10 +11,10 @@ Movie paardenVideo;
 
 
 void setup() {
-  //fullScreen(2);
+  fullScreen(2);
 
 
-  size(1920, 1080);
+  //size(1920, 1080);
   gameState = parseJSONObject("{\"round\":1,\"state\":\"drinking\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
   setupHorses();
   setupGrijper();
@@ -174,7 +174,9 @@ void winningScreen(int winnerInput) {
       break;
   }
   text(winner, 40, 800);
+  client.publish(winTopic, str(winnerInput));
   image(dave, 0, 0);
+  delay(1000);
 }
 
 void movieEvent(Movie m) {
