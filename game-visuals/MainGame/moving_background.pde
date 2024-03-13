@@ -14,7 +14,7 @@ void movingBackground(){
   rect(0,0,width,350);
   
 
-  if ((millis()<(59000+startingTime))&&(millis()>(startingTime))){  
+  if ((millis()<(62000+startingTime))&&(millis()>(startingTime))){  
      if( xStart > -750){
        xStart = xStart - 4;
      }

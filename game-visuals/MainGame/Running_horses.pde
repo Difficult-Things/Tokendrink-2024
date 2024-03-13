@@ -39,8 +39,8 @@ int winningHorse(){
   if ((millis()<(54000+startingTime))&&(millis()>(50000+startingTime))){
    xWinnerHorse = xWinnerHorse + 1;
   }
-  if ((millis()<(58000+startingTime))&&(millis()>(54000+startingTime))){
-    xWinnerHorse = xWinnerHorse+ 2;
+  if ((millis()<(67000+startingTime))&&(millis()>(54000+startingTime))){
+    xWinnerHorse = xWinnerHorse+ 5;
   }
 
   return xWinnerHorse;
@@ -62,14 +62,14 @@ int secondHorse(){
   if ((millis()<(32000+startingTime))&&(millis()>(26000+startingTime))){
     xSecondHorse = xSecondHorse +2;
   }
-  if ((millis()<(36000+startingTime))&&(millis()>(32000+startingTime))){
+  if ((millis()<(36000+startingTime))&&(millis()>(26000+startingTime))){
     xSecondHorse = xSecondHorse -2;
   }
   if ((millis()<(44000+startingTime))&&(millis()>(36000+startingTime))){
     xSecondHorse = xSecondHorse +0;
   }
-  if ((millis()<(62000+startingTime))&&(millis()>(50000+startingTime))){
-    xSecondHorse = xSecondHorse +1;
+  if ((millis()<(71000+startingTime))&&(millis()>(50000+startingTime))){
+    xSecondHorse = xSecondHorse +2;
   }
 
   return xSecondHorse;
@@ -121,7 +121,7 @@ int thirdHorse(){
   if ((millis()<(63000+startingTime))&&(millis()>(57000+startingTime))){      // "dies at 60-6 sec
     xThirdHorse = xThirdHorse -3;
   }
-  if((millis()<(75000+startingTime))&&(millis()>(63000+startingTime))){      // finishline passing
+  if((millis()<(84000+startingTime))&&(millis()>(63000+startingTime))){      // finishline passing
     xThirdHorse = xThirdHorse +3;
   }
   return xThirdHorse; 
@@ -158,7 +158,7 @@ int fourthHorse(){
   if ((millis()<(63000+startingTime))&&(millis()>(43000+startingTime))){      //dies
     xFourthHorse = xFourthHorse - 3;
   }  
-  if((millis()<(82000+startingTime))&&(millis()>(63000+startingTime))){      // finishline passing
+  if((millis()<(91000+startingTime))&&(millis()>(63000+startingTime))){      // finishline passing
     xFourthHorse = xFourthHorse +4;
   }
   return xFourthHorse; 
@@ -189,7 +189,7 @@ int lastHorse(){
   if ((millis()<(63000+startingTime))&&(millis()>(26000+startingTime))){    //dies
     xLastHorse = xLastHorse -2;
   }
-  if((millis()<(90000+startingTime))&&(millis()>(63000+startingTime))){      // finishline passing
+  if((millis()<(93000+startingTime))&&(millis()>(63000+startingTime))){      // finishline passing
     xLastHorse = xLastHorse +3;
   }
   return xLastHorse;

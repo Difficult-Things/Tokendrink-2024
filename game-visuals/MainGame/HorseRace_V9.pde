@@ -88,13 +88,13 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
     
     
     
-    horseGreen(getPosition(green));
-    horsePurple(getPosition(purple));
-    horseBlue(getPosition(blue));
-    horseRed(getPosition(red));
-    horseOrange(getPosition(orange));
+    horseGreen(getPosition(green), green);
+    horsePurple(getPosition(purple), purple);
+    horseBlue(getPosition(blue), blue);
+    horseRed(getPosition(red), red);
+    horseOrange(getPosition(orange), orange);
   }
-  if (millis() > startingTime + 61000 && startingTime != 0) {
+  if (millis() > startingTime + 65000 && startingTime != 0) {
     pushStyle();
     String winningText = "";
     if (green == 1) {
