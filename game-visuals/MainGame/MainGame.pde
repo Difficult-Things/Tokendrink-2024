@@ -11,17 +11,17 @@ Movie paardenVideo;
 
 
 void setup() {
-  //fullScreen(2);
+  fullScreen(2);
 
 
-  size(1920, 1080);
+  //size(1920, 1080);
   gameState = parseJSONObject("{\"round\":1,\"state\":\"drinking\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
   setupHorses();
   setupGrijper();
   setupPlinko();
   setupSlots();
   setupRoulette();
-  
+
   rouletteVideo = new Movie(this, "Roulette Screensaver.mp4");
   slotsVideo = new Movie(this, "Slot Machine Screensaver.mp4");
   plinkoVideo = new Movie(this, "Plinko Screensaver.mp4");
@@ -84,7 +84,7 @@ void draw() {
     }
     break;
   case 3:
-   switch(state) {
+    switch(state) {
     case "drinking":
       pushStyle();
       plinkoVideo.play();
@@ -151,30 +151,41 @@ void draw() {
 }
 
 void winningScreen(int winnerInput) {
-  textAlign(LEFT,UP);
-    imageMode(CORNER);
+  textAlign(LEFT, UP);
+  imageMode(CORNER);
   background(255, 255, 255);
   textSize(128);
   fill(0);
   switch(winnerInput) {
-    case 0: 
-      winner = "Green Wins!";
-      break;
-    case 1: 
-      winner = "Purple Wins!";
-      break;
-    case 2: 
-      winner = "Orange Wins!";
-      break;
-    case 3: 
-      winner = "Blue Wins!";
-      break;
-    case 4: 
-      winner = "Red Wins!";
-      break;
+  case 0:
+    fill(#009040);
+    winner = "Green Wins!";
+    break;
+  case 1:
+    fill(#7724DE);
+
+    winner = "Purple Wins!";
+    break;
+  case 2:
+    winner = "Orange Wins!";
+    fill(#EC681C);
+
+    break;
+  case 3:
+    fill(#3280EA);
+
+    winner = "Blue Wins!";
+    break;
+  case 4:
+    fill(#BA0C2F);
+
+    winner = "Red Wins!";
+    break;
   }
   text(winner, 40, 800);
+  client.publish(winTopic, str(winnerInput));
   image(dave, 0, 0);
+  delay(4000);
 }
 
 void movieEvent(Movie m) {

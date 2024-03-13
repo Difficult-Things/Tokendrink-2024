@@ -10,15 +10,33 @@ void setupMQTT() {
 
 void clientConnected() {
   println("client connected");
-  client.publish(statusTopic, "ONLINE");
+  client.publish(statusTopic, "ONLINE", 2, true);
 
   client.subscribe(gameStateTopic, 2);
+    client.subscribe(winTopic, 2);
+    client.subscribe("finalWinner", 2);
+
 }
 
 void messageReceived(String topic, byte[] payload) {
   String incomingPayload = new String(payload);
   if(topic.equals(gameStateTopic)){
       gameState= parseJSONObject(incomingPayload);
+  }
+    if(topic.equals(winTopic)){
+      int winningColor = parseInt(new String(payload));
+      winningTeam = winningColor;
+      winningTimer = millis();
+     
+      //gameState= parseJSONObject(incomingPayload);
+  }
+  
+      if(topic.equals("finalWinner")){
+      //int finalWinner = parseInt(new String(payload));
+      finalWinner = parseInt(new String(payload));;
+      //final = millis();
+     
+      //gameState= parseJSONObject(incomingPayload);
   }
 
 }
