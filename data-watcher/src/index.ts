@@ -12,10 +12,16 @@ var argv = require("minimist")(process.argv.slice(2));
 const session = new Session();
 
 // MQTT
-const client = mqtt.connect("mqtt://localhost:1883");
+const client = mqtt.connect("mqtt://localhost:1883", {will: {
+  topic: 'data-watcher/status',
+  payload: Buffer.from("OFFLINE", "utf-8"),
+  qos: 1,
+  retain: true
+}}
+);
 client.on("connect", function () {
   console.log("Connected to MQTT server");
-  client.publish("data-watcher/status", "ONLINE");
+  client.publish("data-watcher/status", "ONLINE", { retain: true });
 });
 
 client.on("error", function (error) {
