@@ -1,10 +1,14 @@
 import chokidar from "chokidar";
-import csv from "csvtojson";
 
 import fs from "fs";
 import path from "path";
 
+import { PdfDocument } from "@ironsoftware/ironpdf";
+import { Session } from "./util/session";
+
 var argv = require("minimist")(process.argv.slice(2));
+
+const session = new Session();
 
 // Path to watch
 const DEFAULT_PATH = path.join(process.cwd(), "tokendrink-pubcard-data");
@@ -39,9 +43,19 @@ watcher.on("add", async (path) => {
   const time = new Date().toLocaleTimeString();
   console.log(`${time}: File ${path} has been added.`);
 
+  // Check if filetype is pdf
+  if (!path.endsWith(".pdf")) return;
+
   try {
-    const json = await csv().fromFile(path);
     // Handle data to game server
+    const pdf = await PdfDocument.fromFile(path);
+    const text = await pdf.extractText();
+
+    // fs.writeFileSync(path.replace(".pdf", ".txt"), text);
+
+    session.processPDF(text);
+    session.showData();
+
   } catch (err) {
     console.error(err);
   }
