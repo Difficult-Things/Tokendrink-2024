@@ -14,11 +14,11 @@ void movingBackground(){
   rect(0,0,width,350);
   
 
-  if ((millis()<(65000+startingTime))&&(millis()>(6000+startingTime))){  
+  if ((millis()<(59000+startingTime))&&(millis()>(startingTime))){  
      if( xStart > -435){
        xStart = xStart - 4;
      }
-     if (millis()>(53000+startingTime)&&(xStart<-430)){
+     if (millis()>(47000+startingTime)&&(xStart<-430)){
        xStart = xFinish;
      }
     //clouds
@@ -50,20 +50,20 @@ void movingBackground(){
   image(background_fence, xFence-7, 200, 4000, 150);
   
   
-  textAlign(CENTER);
-  if ((millis()>(3000+startingTime))&& (millis()<(4000+startingTime))){
-    fill(255);
-    textSize(500);
-    text("3", width/2, height/2);
-  }
-    if ((millis()>(4000+startingTime))&& (millis()<(5000+startingTime))){
-    fill(255);
-    textSize(500);
-    text("2", width/2, height/2);
-  }
-    if ((millis()>(5000+startingTime))&& (millis()<(6000+startingTime))){
-    fill(255);
-    textSize(500);
-    text("1", width/2, height/2);
-  }
+  //textAlign(CENTER);
+  //if ((millis()>(3000+startingTime))&& (millis()<(4000+startingTime))){
+  //  fill(255);
+  //  textSize(500);
+  //  text("3", width/2, height/2);
+  //}
+  //  if ((millis()>(4000+startingTime))&& (millis()<(5000+startingTime))){
+  //  fill(255);
+  //  textSize(500);
+  //  text("2", width/2, height/2);
+  //}
+  //  if ((millis()>(5000+startingTime))&& (millis()<(6000+startingTime))){
+  //  fill(255);
+  //  textSize(500);
+  //  text("1", width/2, height/2);
+  //}
 }
