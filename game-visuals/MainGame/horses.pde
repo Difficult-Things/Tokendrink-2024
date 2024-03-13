@@ -27,7 +27,7 @@ void baseHorseStill(int xSpot, int ySpot,color accent1, color accent2){
 
 void baseHorseMoving(int xSpot, int ySpot,color accent1, color accent2){
   noStroke();
-  if (millis()>6000+startingTime&& millis()<6100+startingTime){
+  if (millis()>startingTime&& millis()<100+startingTime){
     startingFrames=frameCount;
   }
    
@@ -49,7 +49,7 @@ void baseHorseMoving(int xSpot, int ySpot,color accent1, color accent2){
     
   }
   
-  if((frameCount-startingFrames == b+10)&&millis()>6000+startingTime){
+  if((frameCount-startingFrames == b+10)&&millis()>startingTime){
     b = frameCount-startingFrames;
     lastHorseFrame=2;
   } 

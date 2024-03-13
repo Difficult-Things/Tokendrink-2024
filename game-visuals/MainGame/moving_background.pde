@@ -14,11 +14,11 @@ void movingBackground(){
   rect(0,0,width,350);
   
 
-  if ((millis()<(65000+startingTime))&&(millis()>(6000+startingTime))){  
+  if ((millis()<(59000+startingTime))&&(millis()>(startingTime))){  
      if( xStart > -750){
        xStart = xStart - 4;
      }
-     if (millis()>(33000+startingTime)&&(xStart<-700)){
+     if (millis()>(27000+startingTime)&&(xStart<-700)){
        xStart = xFinish;
      }
     //clouds
