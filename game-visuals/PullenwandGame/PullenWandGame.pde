@@ -10,7 +10,7 @@ void setup() {
   setupPlinko();
   
   //Comment line below if testing without MQTT running
-  //setupMQTT();
+  setupMQTT();
   delay(100);
 }
 
@@ -31,9 +31,9 @@ void draw() {
      //hier de visual die kwartiertje duurt ofzo
      break;
      case "reveal":
-     //ff de odds laten zien enzo
      break;
      case "play":
+     if(!firstBall){dropBall();firstBall = true;}
      drawPlinko();
      break;
      

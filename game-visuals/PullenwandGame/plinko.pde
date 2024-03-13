@@ -1,129 +1,136 @@
-  final int plinkoNUM_COLS = 7;
-  final int plinkoNUM_ROWS = 9;
-  final float plinkoPIN_SIZE = 6;
-  final float plinkoBALL_SIZE = 13;
-  final float plinkoGRAVITY = 0.02;
-  final float plinkoBOUNCINESS = 0.1; // Adjusted for realistic bounciness
-
-  PVector plinkoSquareTopLeft, plinkoSquareBottomRight;
-  ArrayList<PVector> plinkoPins;
-  PlinkoBall plinkoBall;
-  boolean plinkoBallExists = false;
-  boolean plinkoBallDropped = false;
+final int plinkoCols = 7;
+final int plinkoRows = 9;
+int plinkoDropX = 450; // Changed to non-final to allow updating
+final float plinkoPinSize = 6;
+final float plinkoBallSize = 14;
+final float plinkoGravity = 0.005;
+final float plinkoBounciness = 0.0;
+boolean plinkoBallExists = false;
+int lastDropFrame = 0;
+final int dropInterval = 5 * 60; // 5 seconds in frames (assuming 60 frames per second)
+PVector plinkoBoundsTopLeft, plinkoBoundsBottomRight;
+PVector plinkoTopLeft, plinkoBottomRight;
+ArrayList<PVector> plinkoPins;
+PlinkoBall plinkoBall;
+boolean firstBall = false;
 
 
 void setupPlinko() {
-  // Define the area for the Plinko game by setting the top-left and bottom-right coordinates
-  float plinkoRectWidth = 240; // Adjusted width
-  float plinkoRectHeight = 160; // Adjusted height
-  plinkoSquareTopLeft = new PVector(50, 50); // Adjusted coordinates
-  plinkoSquareBottomRight = new PVector(plinkoSquareTopLeft.x + plinkoRectWidth, plinkoSquareTopLeft.y + plinkoRectHeight);
+  size(1600, 400);
+  noSmooth();
+  noStroke();
+  lights = new LightCanvas(this, "layout.json");
 
-  // Calculate pin positions
-  float plinkoColSpacing = plinkoRectWidth / (plinkoNUM_COLS - 1);
-  float plinkoRowSpacing = plinkoRectHeight / ((plinkoNUM_ROWS - 1) / 2 * 3 + (plinkoNUM_ROWS - 1) % 2); // Adjusted for staggered rows
+  plinkoBoundsTopLeft = new PVector(410, 20);
+  plinkoBoundsBottomRight = new PVector(615, 170);
+
+  plinkoTopLeft = new PVector(410, 44);
+  plinkoBottomRight = new PVector(615, 280); // Adjusted to match original math
+
+  float colSpacing = (plinkoBottomRight.x - plinkoTopLeft.x) / (plinkoCols - 1);
+  float rowSpacing = (plinkoBottomRight.y - plinkoTopLeft.y) / ((plinkoRows - 1) / 2 * 3 + (plinkoRows - 1) % 2);
 
   plinkoPins = new ArrayList<PVector>();
-  for (int plinkoRow = 0; plinkoRow < plinkoNUM_ROWS; plinkoRow++) {
-    int plinkoCols = plinkoRow % 2 == 0 ? plinkoNUM_COLS : plinkoNUM_COLS - 1;
-    for (int plinkoCol = 0; plinkoCol < plinkoCols; plinkoCol++) {
-      float plinkoX = plinkoSquareTopLeft.x + plinkoCol * plinkoColSpacing + (plinkoRow % 2 == 0 ? 0 : plinkoColSpacing / 2);
-      float plinkoY = plinkoSquareTopLeft.y + plinkoRow * plinkoRowSpacing * 2 / 3; // Adjust for staggered rows
-      plinkoPins.add(new PVector(plinkoX, plinkoY));
+  for (int row = 0; row < plinkoRows; row++) {
+    int cols = row % 2 == 0 ? plinkoCols : plinkoCols - 1;
+    for (int col = 0; col < cols; col++) {
+      float x = plinkoTopLeft.x + col * colSpacing + (row % 2 == 0 ? 0 : colSpacing / 2);
+      float y = plinkoTopLeft.y + row * rowSpacing * 2 / 3;
+      plinkoPins.add(new PVector(x, y));
     }
   }
-  background(0);
 }
-
-
-
-
-
-
-
-
-
-
 
 void drawPlinko() {
-  background(0);
-  fill(0);
-  noStroke();
-  rect(plinkoSquareTopLeft.x, plinkoSquareTopLeft.y, plinkoSquareBottomRight.x - plinkoSquareTopLeft.x, plinkoSquareBottomRight.y - plinkoSquareTopLeft.y);
+  fill(#000000);
 
-  fill(#FF0000);
-  for (PVector plinkoPin : plinkoPins) {
-    ellipse(plinkoPin.x, plinkoPin.y, plinkoPIN_SIZE, plinkoPIN_SIZE);
+  rect(0, 0, width, height);
+
+
+  fill(#FF8D00); // Adjust color to your preference
+  rect(390, 30, 240, 150);
+
+  //fill(0); // Adjust color to your preference for pins
+  noFill();
+  for (PVector pin : plinkoPins) {
+    ellipse(pin.x, pin.y, plinkoPinSize, plinkoPinSize);
   }
 
-  if (plinkoBallExists && plinkoBallDropped) {
+  // Draw plinko ball if exists
+  if (plinkoBallExists) {
     plinkoBall.update();
     plinkoBall.display();
-    plinkoBall.checkCollision(plinkoPins, plinkoPIN_SIZE);
+    plinkoBall.checkCollision(plinkoPins, plinkoPinSize);
   }
-  delay(2);
 }
 
-void plinkoMousePressed() {
-  if (!plinkoBallDropped) {
-    plinkoBall = new PlinkoBall((plinkoSquareTopLeft.x + plinkoSquareBottomRight.x) / 2, plinkoSquareTopLeft.y, plinkoBALL_SIZE); // Drop location set to the top-center
-    plinkoBallExists = true;
-    plinkoBallDropped = true;
-  }
+void dropBall() {
+  plinkoDropX = int(random(plinkoBoundsTopLeft.x, plinkoBoundsBottomRight.x));
+  plinkoBall = new PlinkoBall(plinkoDropX, plinkoBoundsTopLeft.y, plinkoBallSize);
+  plinkoBallExists = true;
+  lastDropFrame = frameCount; // Update the last drop frame
 }
 
 class PlinkoBall {
-  PVector plinkoPosition, plinkoVelocity;
-  float plinkoRadius;
+  PVector position, velocity;
+  float radius;
+  boolean hasLanded = false; // Track if the ball has landed
 
-  PlinkoBall(float plinkoX, float plinkoY, float plinkoR) {
-    plinkoPosition = new PVector(plinkoX, plinkoY);
-    plinkoVelocity = new PVector(0, 0);
-    plinkoRadius = plinkoR / 2; // Adjusted to use radius as a half-diameter for easier calculations
+  PlinkoBall(float x, float y, float r) {
+    position = new PVector(x, y);
+    velocity = new PVector(0, 0);
+    radius = r / 2;
   }
 
   void update() {
-    plinkoVelocity.y += plinkoGRAVITY;
-    plinkoVelocity.y = min(plinkoVelocity.y, 10);
-    plinkoPosition.add(plinkoVelocity);
-    checkWallCollision();
+    if (!hasLanded) { // Only update if the ball hasn't landed
+      velocity.y += plinkoGravity;
+      velocity.y = min(velocity.y, 10);
+      position.add(velocity);
+      checkWallCollision();
+    }
   }
 
   void display() {
-    fill(255, 0, 255);
-    ellipse(plinkoPosition.x, plinkoPosition.y, plinkoRadius * 2, plinkoRadius * 2);
+    fill(#FFFFFF); // Adjust color to your preference
+    ellipse(position.x, position.y, radius * 2, radius * 2);
   }
 
-  void checkCollision(ArrayList<PVector> plinkoPins, float pinSize) {
-    for (PVector plinkoPin : plinkoPins) {
-      float plinkoD = PVector.dist(plinkoPosition, plinkoPin);
-      if (plinkoD < (plinkoRadius + pinSize / 2)) {
-        PVector plinkoNormal = PVector.sub(plinkoPosition, plinkoPin);
-        plinkoNormal.normalize();
-        float plinkoDot = plinkoVelocity.dot(plinkoNormal);
-        PVector plinkoReflectedVelocity = PVector.sub(plinkoVelocity, PVector.mult(plinkoNormal, 2 * plinkoDot));
-        plinkoVelocity.set(plinkoReflectedVelocity);
-        plinkoPosition.add(PVector.mult(plinkoNormal, (plinkoRadius + pinSize / 2) - plinkoD));
+  void checkCollision(ArrayList<PVector> pins, float pinSize) {
+    for (PVector pin : pins) {
+      float d = PVector.dist(position, pin);
+      if (d < (radius + pinSize / 2)) {
+        PVector normal = PVector.sub(position, pin);
+        normal.normalize();
+        float dot = velocity.dot(normal);
+        PVector reflectedVelocity = PVector.sub(velocity, PVector.mult(normal, 1.8 * dot));
+        velocity.set(reflectedVelocity);
+        position.add(PVector.mult(normal, (radius + pinSize / 2) - d));
       }
     }
   }
 
   void checkWallCollision() {
-    if (plinkoPosition.x - plinkoRadius < plinkoSquareTopLeft.x) {
-      plinkoPosition.x = plinkoSquareTopLeft.x + plinkoRadius;
-      plinkoVelocity.x *= -plinkoBOUNCINESS;
+    if (position.x - radius < plinkoBoundsTopLeft.x) {
+      position.x = plinkoBoundsTopLeft.x + radius;
+      velocity.x *= -plinkoBounciness;
     }
-    if (plinkoPosition.x + plinkoRadius > plinkoSquareBottomRight.x) {
-      plinkoPosition.x = plinkoSquareBottomRight.x - plinkoRadius;
-      plinkoVelocity.x *= -plinkoBOUNCINESS;
+    if (position.x + radius > plinkoBoundsBottomRight.x) {
+      position.x = plinkoBoundsBottomRight.x - radius;
+      velocity.x *= -plinkoBounciness;
     }
-    if (plinkoPosition.y - plinkoRadius < plinkoSquareTopLeft.y) {
-      plinkoPosition.y = plinkoSquareTopLeft.y + plinkoRadius;
-      plinkoVelocity.y *= -plinkoBOUNCINESS;
+    if (position.y - radius < plinkoBoundsTopLeft.y) {
+      position.y = plinkoBoundsTopLeft.y + radius;
+      velocity.y *= -plinkoBounciness;
     }
-    if (plinkoPosition.y + plinkoRadius > plinkoSquareBottomRight.y) {
-      plinkoPosition.y = plinkoSquareBottomRight.y - plinkoRadius;
-      plinkoVelocity.y *= -plinkoBOUNCINESS;
+    // Check if the ball has hit the ground
+    if (position.y + radius > plinkoBoundsBottomRight.y) {
+      position.y = plinkoBoundsBottomRight.y - radius;
+      velocity.y = 0; // Stop vertical movement
+      velocity.x = 0; // Optionally stop horizontal movement as well
+      hasLanded = true; // Mark the ball as landed
+      delay(5000);
+      dropBall();
     }
   }
 }
