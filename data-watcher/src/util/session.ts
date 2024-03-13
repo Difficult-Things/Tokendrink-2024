@@ -39,7 +39,7 @@ export class Session {
 
       console.log(gen, type, amount);
 
-      this.generations[gen].addProduct(type, parseInt(amount));
+      this.generations[gen].setProduct(type, parseInt(amount));
 
     });
   }
@@ -48,6 +48,19 @@ export class Session {
     for (const gen of allGenerations) {
       console.log(gen, this.generations[gen], this.generations[gen].getScore());
     }
+  }
+
+  getData(): {} {
+    const data = [] as {gen: GenerationType, beer: number, soda: number, score: number}[];
+    for (const gen of allGenerations) {
+      data.push({
+        gen,
+        beer: this.generations[gen].getProduct("beer"),
+        soda: this.generations[gen].getProduct("soda"),
+        score: this.generations[gen].getScore()
+      })
+    }
+    return data;
   }
 
   constructor() {
