@@ -15,13 +15,15 @@ export class Session {
       return;
     }
 
-    const tableEndIndex = lines.findIndex(
-      (line, i) => i > tableStartIndex && line.charAt(0) === "€"
-    );
+    // const tableEndIndex = lines.findIndex(
+    //   (line, i) => i > tableStartIndex && line.charAt(0) === "€"
+    // );
 
-    const table = lines.slice(tableStartIndex + 1, tableEndIndex);
+    const table = lines.slice(tableStartIndex + 1, lines.length - 1);
     table.forEach((line) => {
       const [product, amount] = line.split(" ");
+
+      console.log(line);
 
       // Check if product is one of the known products
       if (!product.includes("Beer") && !product.includes("Soda")) return;
