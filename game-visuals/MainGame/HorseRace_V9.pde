@@ -3,6 +3,18 @@ PImage background_fence;
 PImage background_clouds;
 int horseStart = 0;
 int startingTime;
+int startingFrames;
+
+PShape horse1;
+PShape horse1accent1;
+PShape horse1accent2;
+
+PShape horse2;
+PShape horse2accent1;
+PShape horse2accent2;
+
+
+
 PFont WinningFont;
 int countdownPaard = 20;
 boolean messageWinnerSent = false;
@@ -12,6 +24,14 @@ void setupHorses() {
   background_mountains = loadImage("mountains_TokenDrink.png");
   background_fence = loadImage("fence_TokenDrink.png");
   background_clouds = loadImage("clouds_TokenDrink.png");
+  
+  horse1= loadShape("horserunnerWithChildren.svg");
+  horse1accent1 = horse1.getChild("Accent1");
+  horse1accent2 = horse1.getChild("Accent2");
+  
+  horse2= loadShape("horserunnerWithChildren_pos2.svg");
+  horse2accent1 = horse2.getChild("Accent1");
+  horse2accent2 = horse2.getChild("Accent2");
   WinningFont = createFont("Arial Bold", 110);
 }
 
@@ -57,20 +77,24 @@ void drawHorses(int green, int purple, int orange, int blue, int red) {
   if ((horseStart == 0)) {
     horseStart =1;
     startingTime = millis();
+    startingFrames = frameCount;
   }
   if (horseStart == 0) {
     startingBackground();
   }
   if (horseStart == 1) {
+   
     movingBackground();
-
-    horseGreen(getPosition(green));
-    horsePurple(getPosition(purple));
-    horseOrange(getPosition(orange));
-    horseBlue(getPosition(blue));
-    horseRed(getPosition(red));
+    
+    
+    
+    horseGreen(getPosition(green), green);
+    horsePurple(getPosition(purple), purple);
+    horseBlue(getPosition(blue), blue);
+    horseRed(getPosition(red), red);
+    horseOrange(getPosition(orange), orange);
   }
-  if (millis() > startingTime + 61000 && startingTime != 0) {
+  if (millis() > startingTime + 65000 && startingTime != 0) {
     pushStyle();
     String winningText = "";
     if (green == 1) {

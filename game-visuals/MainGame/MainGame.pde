@@ -11,11 +11,11 @@ Movie paardenVideo;
 
 
 void setup() {
-  fullScreen(2);
+  //fullScreen(2);
 
 
-  //size(1920, 1080);
-  gameState = parseJSONObject("{\"round\":1,\"state\":\"drinking\", \"ranking\": {\"green\":5, \"purple\":2, \"orange\":3, \"blue\":4, \"red\":1}}");
+  size(1920, 1080);
+  gameState = parseJSONObject("{\"round\":1,\"state\":\"drinking\", \"ranking\": {\"green\":3, \"purple\":5, \"orange\":4, \"blue\":1, \"red\":2}}");
   setupHorses();
   setupGrijper();
   setupPlinko();
@@ -36,6 +36,9 @@ void setup() {
 void draw() {
   int round = gameState.getInt("round");
   String state = gameState.getString("state");
+  
+  //int round = 5;
+  //String state = "play";
   JSONObject ranking = gameState.getJSONObject("ranking");
 
 
@@ -143,6 +146,7 @@ void draw() {
       break;
     case "play":
       drawHorses(ranking.getInt("green"), ranking.getInt("purple"), ranking.getInt("orange"), ranking.getInt("blue"), ranking.getInt("red"));
+      //drawHorses(1,2,3,4,5);
       break;
     }
     break;

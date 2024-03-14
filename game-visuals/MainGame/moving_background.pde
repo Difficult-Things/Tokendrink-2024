@@ -1,5 +1,5 @@
 //Start values
-int xMountains = 0;
+float xMountains = 0;
 int xFence = 0;
 int xClouds = 0;
 int xStart = 0;
@@ -14,11 +14,11 @@ void movingBackground(){
   rect(0,0,width,350);
   
 
-  if ((millis()<(59000+startingTime))&&(millis()>(startingTime))){  
-     if( xStart > -435){
+  if ((millis()<(62000+startingTime))&&(millis()>(startingTime))){  
+     if( xStart > -750){
        xStart = xStart - 4;
      }
-     if (millis()>(47000+startingTime)&&(xStart<-430)){
+     if (millis()>(27000+startingTime)&&(xStart<-700)){
        xStart = xFinish;
      }
     //clouds
@@ -28,26 +28,26 @@ void movingBackground(){
     
     //mountains
     if (xMountains>(-4000+width)){
-      xMountains=xMountains-2;
+      xMountains=xMountains-1.5;
     }
     
     //Fence
-    if (xFence>(-4000+7+width)){
+    if (xFence>(-6000+7+width)){
       xFence=xFence-4;
     }
   } 
   //startline
   stroke(0);
   strokeWeight(25);
-  line(xStart+400, 350, xStart+240, height);
+  line(xStart+700, 350, xStart+540, height);
   
   strokeWeight(10);
-  line(xStart+425,350,xStart+265,height);
+  line(xStart+725,350,xStart+565,height);
   noStroke();
 
   image(background_clouds, xClouds, 60, 4000, 125);
   image(background_mountains, xMountains,50, 4000, 300);
-  image(background_fence, xFence-7, 200, 4000, 150);
+  image(background_fence, xFence-20, 250, 6000, 100);
   
   
   //textAlign(CENTER);
