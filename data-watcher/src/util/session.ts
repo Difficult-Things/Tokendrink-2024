@@ -23,7 +23,6 @@ export class Session {
     table.forEach((line) => {
       const [product, amount] = line.split(" ");
 
-      console.log(line);
 
       // Check if product is one of the known products
       if (!product.includes("Beer") && !product.includes("Soda")) return;
