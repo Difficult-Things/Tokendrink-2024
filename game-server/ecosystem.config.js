@@ -1,7 +1,7 @@
 const path = require('path');
 
 const npmPath = process.platform === 'win32'
-    ? "D:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js"
+    ? "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js"
     : 'npm';
 
     // const npmPath = "npm"
