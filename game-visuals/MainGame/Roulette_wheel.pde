@@ -437,7 +437,7 @@ void spinBall() {
   }
 
   // Decrease ball speed gradually to simulate slowing down
-  ballSpeed = ballSpeed * 0.998;
+  ballSpeed = ballSpeed * 0.994;
 
   //println(ballSpeed);
 
@@ -600,7 +600,7 @@ void displayLandedBallAnimation(int winning) {
     fill(255);
     textSize(50);
     textAlign(CENTER, CENTER);
-    text(9, 0, 0);
+    text(24, 0, 0);
 
     //if Red is winning, red coins will fly down. These appear when you click once more after spinning
     if (winning == 4 && count==7) {
@@ -675,7 +675,7 @@ void displayLandedBallAnimation(int winning) {
 
     for (int i = 0; i < numbers2.length; i++) {
       if (numbers2[i][0] == landedNumber) {
-        text(9, 0, 0); // Display the landed number inside the ball
+        text(24, 0, 0); // Display the landed number inside the ball
         break;
       }
     }

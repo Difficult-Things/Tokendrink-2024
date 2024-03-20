@@ -41,6 +41,7 @@ void idlePhaseHorses() {
 }
 
 void resetHorseValues() {
+  startingTime=0;
   horseStart = 0;
   xWinnerHorse = 0;
   xSecondHorse = 0;
@@ -53,6 +54,7 @@ void resetHorseValues() {
   xStart = 0;
   xFinish = 1700;
   countdownPaard = 20;
+  messageWinnerSent = false;
 }
 
 void drawHorses(int green, int purple, int orange, int blue, int red) {
