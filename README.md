@@ -1,5 +1,5 @@
 # Tokendrink 2024 - 💸💸
-This is the Monorepo (Technically a [monolith](https://monorepo.tools/#what-is-a-monorepo)) for the 2024 edition of the Tokendrink.
+This is the Monorepo for the 2024 edition of the Tokendrink.
 
 ## Folder Structure
 Each folder in the root is a dedicated place for a specific part of the project.
